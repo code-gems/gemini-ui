@@ -1,3 +1,4 @@
+# Gulp packages
 .DS_Store
 *.log
 gulp/node_modules
