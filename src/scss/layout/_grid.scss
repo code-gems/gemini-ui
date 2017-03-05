@@ -24,6 +24,15 @@ $grid-columns: 				12;													// button default height
 	box-sizing: 			border-box;
 }
 
+@mixin grid-cell() {
+	position: 				relative;
+	display: 				block;
+	float: 					left;
+
+	border: 				1px solid #ccc;
+	box-sizing: 			border-box;
+}
+
 @mixin grid-base( $size ) {
 	width:  ( 100% / $grid-columns ) * $size;
 }
@@ -52,7 +61,7 @@ $grid-columns: 				12;													// button default height
 	@for $i from 1 through $grid-columns {
 		.-xs#{$i}, .-s#{$i}, .-m#{$i}, .-l#{$i}, .-xl#{$i} {
 			@include grid-base( $i );
-			@extend %grid-cell;
+			@include grid-cell();
 		}
 	}
 

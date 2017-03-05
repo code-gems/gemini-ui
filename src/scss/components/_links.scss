@@ -1,0 +1,24 @@
+//================================================================================ VARS
+
+// ...
+
+//================================================================================ TEMPLATES
+%link {
+	display: 				inline;
+	color: 					$default-link-color;
+	cursor: 				pointer;
+	font-size: 				$desktop-font-size;
+	line-height: 			$line-height;
+	text-decoration: 		none;
+
+	&:hover {
+		color: 					$default-link-color-h;
+		text-decoration: 		underline;
+	}
+};
+
+//================================================================================ CLASSES
+
+a, .link {
+	@extend %link;
+}

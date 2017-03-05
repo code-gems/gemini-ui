@@ -1,10 +1,10 @@
 //================================================================================ VARS
 
-$desktop-lg-font-size: 			16px;											// [LARGE] default desktop font size
+$desktop-font-size: 			16px;											// default desktop font size
 
-$desktop-lg-line-height: 		1.5em;											// [LARGE] default desktop font size
+$line-height: 					1.5em;											// default desktop font size
 
-$mobile-lg-font-size: 			18px;											// [LARGE] default mobile font size
+$mobile-font-size: 				18px;											// default mobile font size
 
 $padding-l: 					60px;											// [LARGE] base padding
 $padding-m:	 					30px;											// [MEDIUM] base padding
@@ -16,6 +16,9 @@ $no-padding: 					0;												// [SMALL] base padding
 
 $default-text-color: 			#6e6e6e;
 $default-bg-color:	 			#fbfbfb;
+
+$default-link-color: 			#f16033;
+$default-link-color-h: 			lighten( $default-link-color, 20%);
 
 $brand-default:					#ffffff;
 $brand-default-text-color: 		#808080;
@@ -49,7 +52,7 @@ $action-royal-text-color:		#ffffff;
 //================================================================================ FONTS
 
 @font-face {
-    font-family: 'LatoWeb';
+    font-family: 'Lato';
     src: url('fonts/Lato-Regular.eot'); /* IE9 Compat Modes */
     src: url('fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
          url('fonts/Lato-Regular.woff2') format('woff2'), /* Modern Browsers */
@@ -71,8 +74,9 @@ body {
 	padding: 				0;
 
 	color: 					$default-text-color;
-	font-family: 			'Questrial';
-	line-height: 			$desktop-lg-line-height;
+	font-family: 			'Lato';
+	font-size: 				$desktop-font-size;
+	line-height: 			$line-height;
 
 	background-color: 		$default-bg-color;
 }
