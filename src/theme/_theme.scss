@@ -1,0 +1,78 @@
+//================================================================================ VARS
+
+$desktop-lg-font-size: 			16px;											// [LARGE] default desktop font size
+
+$desktop-lg-line-height: 		1.5em;											// [LARGE] default desktop font size
+
+$mobile-lg-font-size: 			18px;											// [LARGE] default mobile font size
+
+$padding-l: 					60px;											// [LARGE] base padding
+$padding-m:	 					30px;											// [MEDIUM] base padding
+$padding-s:	 					15px;											// [SMALL] base padding
+
+$no-padding: 					0;												// [SMALL] base padding
+
+//================================================================================ COLORS
+
+$default-text-color: 			#6e6e6e;
+$default-bg-color:	 			#fbfbfb;
+
+$brand-default:					#ffffff;
+$brand-default-text-color: 		#808080;
+
+$brand-primary:					#39d485;
+$brand-primary-text-color:		#ffffff;
+
+$brand-secondary:				#51637e;
+$brand-secondary-text-color: 	#ffffff;
+
+$brand-tertiary:				#f92672;
+$brand-tertiary-text-color:		#ffffff;
+
+//================================================================================ ACTION COLORS
+
+$action-success:				#5bc25e;
+$action-success-text-color:		#ffffff;
+
+$action-info:					#0aa8f3;
+$action-info-text-color:		#ffffff;
+
+$action-warning:				#ffc100;
+$action-warning-text-color:		#303030;
+
+$action-danger:					#f1432f;
+$action-danger-text-color:		#ffffff;
+
+$action-royal:					#8454d1;
+$action-royal-text-color:		#ffffff;
+
+//================================================================================ FONTS
+
+@font-face {
+    font-family: 'Lato';
+    src: url('fonts/Lato-Regular.eot'); /* IE9 Compat Modes */
+    src: url('fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('fonts/Lato-Regular.woff2') format('woff2'), /* Modern Browsers */
+         url('fonts/Lato-Regular.woff') format('woff'), /* Modern Browsers */
+         url('fonts/Lato-Regular.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
+//================================================================================ THEME
+
+html, body {
+	height: 				100%;
+}
+
+body {
+	margin: 				0;
+	padding: 				0;
+
+	color: 					$default-text-color;
+	font-family: 			'Lato';
+	line-height: 			$desktop-lg-line-height;
+
+	background-color: 		$default-bg-color;
+}

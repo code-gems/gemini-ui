@@ -23,11 +23,11 @@ $btn-lg-border-radius: 		5px;												// [LARGE] button default border radius
 	line-height: 			1em;
 	cursor: 				pointer;
 	outline: 				none;
-	
+
 	border: 				$btn-lg-border-size solid transparent;
 	@include 				border-radius( $btn-lg-border-radius );
 	@include 				border-box();
-	
+
 	background-color: 		$brand-default;
 
 	@include				box-shadow( 0 4px 4px rgba(0,0,0,.1) );
@@ -44,7 +44,7 @@ $btn-lg-border-radius: 		5px;												// [LARGE] button default border radius
 		@include 				box-shadow( 0 10px 30px rgba( $brand-default-text-color, .3 ) );
 		z-index: 				1;
 	}
-	
+
 	&.-outline { @include outline( $brand-default, $brand-default-text-color ) }
 
 	&.-primary {
@@ -90,4 +90,3 @@ button, .btn {
 }
 
 //================================================================================ RESPONSIVE
-

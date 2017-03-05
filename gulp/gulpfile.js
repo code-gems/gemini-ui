@@ -52,7 +52,7 @@ gulp.task('sass', [], function() {
 		verbose 	: true
 	}
 
-	gulp.src( proj.sass_in + "/styles.scss" )
+	gulp.src( proj.sass_in + "/style.scss" )
 		.pipe( bulkSass() )
 		.pipe( sourcemaps.init() )
 		.pipe( sass( options ).on('error', sass.logError) )
