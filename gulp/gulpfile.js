@@ -19,92 +19,31 @@ var gulp 		= require('gulp'),
 
 var proj = {
 		root			: "..",
-		app			: "../source/app",
-		sass			: "../source/scss",
-		vendor			: "../source/vendor",
+		
+		js_in			: "../src/js",
+		js_out			: "../www/js",
 
-		output			: "../www"
+		sass_in			: "../src/scss",
+		sass_out		: "../www/css",
+
+		fonts_in		: "../src/fonts",
+		fonts_out		: "../www/fonts"
 	},
-	production_build = false;
-
-// angular 
-proj.angular		= proj.vendor + "/angular";
-proj.angular_ui		= proj.vendor + "/angular-ui";
-proj.angular_output 	= proj.output + "/js";
-
-//ionic framework
-proj.ionic_sass		= proj.sass 	+ "/ionic-framework/scss";
-proj.ionic_sass_output	= proj.output 	+ "/css";
-proj.ionic_fonts	= proj.sass 	+ "/ionic-framework/fonts";
-proj.ionic_js		= proj.vendor 	+ "/ionic";
-proj.ionic_js_output	= proj.output 	+ "/js";
-
-//priscilla framework
-proj.priscilla_fonts	= proj.sass 	+ "/priscilla-framework/fonts";
-
-//priscilla app
-proj.priscilla_sass		= proj.sass 	+ "/priscilla-framework/";
-proj.priscilla_sass_output	= proj.output 	+ "/css";
-
-// project output
-proj.fonts_output	= proj.output 	+ "/fonts";
-proj.app_output		= proj.output 	+ "/app";
-proj.app_temp_output	= proj.output 	+ "/page";
+	production_build 	= false;
 
 // =============================================================================== TASKS
 
 gulp.task("clear_fonts", [], function() {
 	return del([ 
-		proj.fonts_output + "/**", 
-		"!" + proj.fonts_output + "/fonts/" 
+		proj.fonts_out + "/**", 
+		"!" + proj.fonts_out + "/fonts/" 
 	], { force: true } );
 });
 	
-gulp.task("copy_priscilla_templates", [], function() {
-	gulp.src( proj.app + "/templates/**/*" )
-		.pipe( gulp.dest( proj.app_temp_output ) );
-		
-	gulp.src( proj.app + "/templates/**/*.htm" )
-		.pipe( gulp.dest( proj.app_temp_output ) )
+gulp.task('copy_fonts', [], function() {
+	gulp.src( proj.fonts_in + "/**.*" )
+		.pipe( gulp.dest( proj.fonts_out ) )
 		.pipe( debug() );
-});
-	
-gulp.task("copy_ionic_fonts", [], function() {
-	gulp.src( proj.ionic_fonts + "/**/*.*" )
-		.pipe( gulp.dest( proj.ionic_fonts_output ) )
-		.pipe( debug() );
-});
-
-gulp.task('copy_priscilla_fonts', [], function() {
-	gulp.src( proj.priscilla_fonts + "/**.*" )
-		.pipe( gulp.dest( proj.priscilla_fonts_output ) )
-		.pipe( debug() );
-});
-
-gulp.task('ionic_sass', [], function() {
-	var options = {
-		outputStyle	: 'compressed',
-		verbose 	: true
-	}
-
-	gulp.src( proj.ionic_sass + "/ionic.scss" )
-		.pipe( bulkSass() )
-		// .pipe( sourcemaps.init() )
-		.pipe( sass( options ).on('error', sass.logError) )
-		.pipe( cleanCSS() )
-		// .pipe( sourcemaps.write('./') )
-		.pipe( gulp.dest( proj.ionic_sass_output ));
-
-
-	gulp.src( proj.ionic_sass + "/ionic-harris.scss" )
-		.pipe( bulkSass() )
-		.pipe( sourcemaps.init() )
-		.pipe( sass( options ).on('error', sass.logError) )
-		.pipe( cleanCSS() )
-		.pipe( sourcemaps.write('./') )
-		.pipe( gulp.dest( proj.ionic_sass_output ));
-
-
 });
 
 gulp.task('priscilla_sass', [], function() {
