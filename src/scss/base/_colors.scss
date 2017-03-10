@@ -2,15 +2,19 @@
 
 $brand-primary-bg: 				#39d485;
 $brand-primary-txt:				#ffffff;
+$brand-primary-br: 				darken( $brand-primary-bg, 10% );
 
 $brand-secondary-bg: 			#f92672;
 $brand-secondary-txt:			#ffffff;
+$brand-secondary-br: 			darken( $brand-secondary-bg, 10% );
 
 $brand-tertiary-bg: 			#51637e;
 $brand-tertiary-txt: 			#99afce;
+$brand-tertiary-br: 			darken( $brand-tertiary-bg, 10% );
 
 $brand-quaternary-bg: 			#8454d1;
 $brand-quaternary-txt: 			#d4c3ee;
+$brand-quaternary-br: 			darken( $brand-quaternary-bg, 10% );
 
 // ======================================================================================================= BASE COLORS
 
