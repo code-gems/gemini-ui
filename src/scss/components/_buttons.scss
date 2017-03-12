@@ -1,25 +1,40 @@
-//================================================================================ VARS
+// ======================================================================================================= VARS
 
-$btn-lg-height: 			48px;												// [LARGE] button default height
+$btn-l-height: 					60px;																	// [LARGE] button default height
 
-$btn-lg-padding: 			15px;												// [LARGE] button padding
+$btn-l-padding: 				30px;																	// [LARGE] button default padding
 
-$btn-lg-font-size: 			16px;												// [LARGE] button default font size
+$btn-l-font-size: 				16px;																	// [LARGE] button default font size
 
-$btn-lg-border-size: 		1px;												// [LARGE] button default border size
+$btn-l-border-size: 			2px;																	// [LARGE] button default border size
 
-$btn-lg-border-radius: 		5px;												// [LARGE] button default border radius
+$btn-l-border-radius: 			15px;																	// [LARGE] button default border radius
 
-//================================================================================ TEMPLATES
+// ======================================================================================================= TEMPLATES & MIXINS
 
-%button {
-	display: 				inline-block;
-	padding: 				( $btn-lg-height - ( $btn-lg-padding * 2 ) ) $btn-lg-padding;
+@mixin btn-base( $color-txt, $color-bg, $color-br ) {
+	color: 					$color-txt;
+	background-color: 		$color-bg;
 
-	color: 					$brand-default-text-color;
+	&:hover { background-color: lighten( $color-bg, 5% ) }
+
+	&.-outline {
+		color:					$color-txt;
+		border: 				2px solid $color-br;
+		background-color:		transparent;
+	}
+}
+
+%btn {
+	position:				relative;
+	display:				inline-block;
+	padding:				( $btn-l-height - ( $btn-l-padding * 2 ) ) $btn-lg-padding;
+
+	color:					$brand-default-text-color;
 	font-size: 				$btn-lg-font-size;
 	font-weight: 			600;
 	text-decoration: 		none;
+	text-transform: 		uppercase;
 	line-height: 			1em;
 	cursor: 				pointer;
 	outline: 				none;
@@ -70,23 +85,21 @@ $btn-lg-border-radius: 		5px;												// [LARGE] button default border radius
 
 }
 
-%button-group {
+%btn-group {
 	display: 				table;
 	width: 					100%;
 
 	button, .btn {
 		display: 				table-cell;
+		padding:				0 $btn-l-height / 2;
+		line-height: 			$btn-l-height;
 	}
 }
 
 //================================================================================ CLASSES
 
-button, .btn {
-	@extend %button;
-}
+button, .btn { @extend %btn; }
 
-.btn-group{
-	@extend %button-group;
-}
+.btn-group{ @extend %btn-group; }
 
 //================================================================================ RESPONSIVE
