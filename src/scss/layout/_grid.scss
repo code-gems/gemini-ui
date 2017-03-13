@@ -40,10 +40,42 @@ $grid-columns: 						12;																	// number of columns in a grid
 
 // ======================================================================================================= RESPONSIVE
 
-@media screen and ( max-width: $screen-size-m ) {
+@media all and ( max-width: $screen-size-xl ) {
+
+	@for $i from 1 through $grid-columns {
+		.-xl#{$i} { @include cell-width( $i ); }
+	}
+
+}
+
+@media all and ( max-width: $screen-size-l ) {
+
+	@for $i from 1 through $grid-columns {
+		.-l#{$i} { @include cell-width( $i ); }
+	}
+
+}
+
+@media all and ( max-width: $screen-size-m ) {
 
 	@for $i from 1 through $grid-columns {
 		.-m#{$i} { @include cell-width( $i ); }
+	}
+
+}
+
+@media all and ( max-width: $screen-size-s ) {
+
+	@for $i from 1 through $grid-columns {
+		.-s#{$i} { @include cell-width( $i ); }
+	}
+
+}
+
+@media all and ( max-width: $screen-size-xs ) {
+
+	@for $i from 1 through $grid-columns {
+		.-xs#{$i} { @include cell-width( $i ); }
 	}
 
 }
