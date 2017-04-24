@@ -1,0 +1,38 @@
+// ======================================================================================================= VARS
+
+$anim-spin-duration:			2s;																		// animation duration
+$anim-spin-delay:				0s;																		// animation delay
+$anim-spin-timing: 				linear;																	// animation timing function
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%anim-spin {
+	animation-duration: 		$anim-spin-duration;
+	animation-delay: 			$anim-spin-delay;
+	animation-timing-function: 	$anim-spin-timing;
+	animation-iteration-count: 	infinite;
+	animation-name: 			spin;
+
+	&.-once { animation-iteration-count: 1; }
+}
+
+// ======================================================================================================= CLASSES
+
+.-spin { @extend %anim-spin; }
+
+// ======================================================================================================= ANIMATIONS
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(359deg); }
+}
+
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(359deg); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(359deg); }
+}

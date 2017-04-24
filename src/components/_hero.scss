@@ -1,0 +1,64 @@
+// ======================================================================================================= VARS
+
+$hero-badge-size: 			72px;
+$hero-badge-border-size:	4px;
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%hero {
+	position:				relative;
+	display:				block;
+	padding: 				$base-padding;
+
+	@extend 				%clearfix;
+	@include 				draw( $base-color-bg, $base-color-txt, $base-color-bg );
+
+	.hero-badge {
+		position: 				absolute;
+		display: 				block;
+		width: 					$hero-badge-size;
+		height:					$hero-badge-size;
+		margin-bottom: 			- $hero-badge-size / 2;
+		margin-left: 			- $hero-badge-size / 2;
+		padding: 				0;
+		bottom: 				0;
+		left: 					50%;
+
+		color: 					inherit;
+		line-height:			$hero-badge-size;
+		text-align: 			center;
+		font-size: 				2em;
+
+		@include 				round( $hero-badge-size / 2 );
+		border: 				$hero-badge-border-size solid;
+
+		background-color: 		inherit;
+
+		@include 				shadow( 0 2px 5px rgba(0, 0, 0, .1) );
+	}
+
+	&.-badge {
+		padding-bottom: 		$base-padding + ($base-padding / 2);
+		margin-bottom: 			$hero-badge-size / 2;
+		border-bottom: 			$hero-badge-border-size solid;
+
+		@include 				shadow( 0 2px 5px rgba(0, 0, 0, .1) );
+	}
+
+	&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-txt ) }
+	&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-txt ) }
+	&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-txt ) }
+	&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-txt ) }
+
+	&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg, $action-success-txt ) }
+	&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg, 	$action-info-txt ) }
+	&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg, $action-warning-txt ) }
+	&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg, 	$action-danger-txt ) }
+
+} //-- end of %hero
+
+//================================================================================ CLASSES
+
+.hero { @extend %hero; }
+
+//================================================================================ RESPONSIVE

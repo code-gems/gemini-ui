@@ -1,0 +1,141 @@
+// ======================================================================================================= VARS
+
+$btn-height: 					48px;																	// [MEDIUM] button default - height
+$btn-padding: 					$base-padding;															// [MEDIUM] button default - padding
+$btn-font-size: 				$desktop-font-size;														// [MEDIUM] button default - font size
+$btn-border-size: 				2px;																	// [MEDIUM] button default - border size
+$btn-border-radius: 			$btn-height / 2;														// [MEDIUM] button default - border radius
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+@mixin btn-base( $txt, $bg, $br: $bg ) {
+	color: 					$txt;
+	background-color: 		$bg;
+	border-color: 			$br;
+
+	// &:hover { background-color: lighten( $bg, 5% ) }
+	&.-outline {
+		color:					$bg;
+		line-height: 			$btn-height - ($btn-border-size * 2);
+		border: 				2px solid $br;
+		background-color:		transparent;
+	}
+
+	svg, .spinner svg {
+		fill: 					$txt !important;
+		stroke: 				$txt !important;
+	}
+}
+
+@mixin outline( $txt, $br ) {
+	color:					$txt;
+	line-height: 			$btn-height - ($btn-border-size * 2);
+	border: 				2px solid $br;
+	background-color:		transparent;
+}
+
+%btn {
+	position:				relative;
+	display:				inline-block;
+	height: 				$btn-height;
+	padding:				0 ($btn-padding / 2);
+	overflow: 				hidden;
+
+	font-size: 				$btn-font-size;
+	font-weight: 			normal;
+	font-family: 			$desktop-font-family;
+	text-decoration: 		none;
+	text-transform: 		uppercase;
+	text-overflow: 			ellipsis;
+	text-align: 			center;
+	line-height: 			$btn-height;
+	cursor: 				pointer;
+	outline: 				none;
+	white-space: 			nowrap;
+
+	vertical-align: 		middle;
+
+	@include 				btn-base( $base-color-txt, $base-color-bg, $base-color-br );
+
+	border: 				none;
+	@include 				round( 3px );
+	@include 				border-box();
+
+
+	&.-full { width: 100%; }
+	&.-round { @include round( $btn-border-radius ); }
+	&.-outline { @include outline( $base-color-txt, $base-color-txt ) }
+	&:disabled, &[disabled^="disabled"] { @include btn-base( $btn-disable-txt, $btn-disable-bg ) }
+
+	&.-primary 		{ @include btn-base( $brand-primary-txt, 	$brand-primary-bg ) }
+	&.-secondary 	{ @include btn-base( $brand-secondary-txt, 	$brand-secondary-bg ) }
+	&.-tertiary 	{ @include btn-base( $brand-tertiary-txt, 	$brand-tertiary-bg ) }
+	&.-quaternary 	{ @include btn-base( $brand-quaternary-txt, $brand-quaternary-bg ) }
+
+	&.-white 	{ @include btn-base( $base-color-bg, 		$base-color-txt, 	$base-color-bg ) }
+
+	&.-success 	{ @include btn-base( $action-success-txt, 	$action-success-bg ) }
+	&.-info 	{ @include btn-base( $action-info-txt, 		$action-info-bg ) }
+	&.-warning 	{ @include btn-base( $action-warning-txt, 	$action-warning-bg ) }
+	&.-danger 	{ @include btn-base( $action-danger-txt, 	$action-danger-bg ) }
+	&.-glass	{ @include btn-base( inherit, 				transparent) }
+
+	&.-mobile { max-width: 414px; }
+	&.-icon {
+		width: 					$btn-height;
+		height: 				$btn-height;
+		padding: 				0;
+
+		text-align: 			center;
+		line-height: 			$btn-height;
+		font-size: 				120%;
+	}
+
+	ion-spinner svg {
+		width: 					$btn-height;
+		height: 				$btn-height;
+	}
+
+}
+
+%btn-group {
+	@include 				display-flex();
+	@include 				flex-flow( row nowrap );
+	width: 					100%;
+
+	button, .btn {
+		display: 				block;
+		@include 				flex( 1 0 auto );
+		min-width: 				1%;
+		margin-left:			5px;
+
+		&:first-child() { margin-left: 0; }
+
+		&.-icon {
+			width: 					48px;
+			@include 				flex( 0 0 48px );
+		}
+	}
+
+	&.-left {
+		@include 				justify-content( flex-start );
+		float: 					none;
+	}
+	&.-center {
+		@include 				display-flex();
+		margin: 				auto;
+		@include 				justify-content( cener );
+	}
+	&.-right {
+		@include 				justify-content( flex-end );
+		float: 					none;
+	}
+}
+
+//================================================================================ CLASSES
+
+button, .btn { @extend %btn; }
+
+.btn-group{ @extend %btn-group; }
+
+//================================================================================ RESPONSIVE

@@ -1,0 +1,34 @@
+// ======================================================================================================= VARS
+
+// ...
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+@mixin spinner-base( $fill, $stroke: $fill ) {
+	fill: 	$fill;
+	stroke: $stroke;
+}
+
+%spinner {
+	fill: 					$base-color-txt;
+	stroke: 				$base-color-txt;
+
+	&.-white { @include spinner-base( #ffffff ); }
+
+	&.-primary { @include spinner-base( $brand-primary-txt ); }
+
+	&.-secondary { @include spinner-base( $brand-secondary-txt ); }
+
+	&.-tertiary { @include spinner-base( $brand-tertiary-txt ); }
+
+	&.-quaternary { @include spinner-base( $brand-quaternary-txt ); }
+
+	svg {
+		width: 					$default-height;
+		height: 				$default-height;
+	}
+}
+
+// ======================================================================================================= CLASSES
+
+.spinner { @extend %spinner; }

@@ -1,0 +1,35 @@
+// ======================================================================================================= VARS
+
+$anim-pulse-duration:			2s;																		// animation duration
+$anim-pulse-delay:				0s;																		// animation delay
+$anim-pulse-timing: 			ease-in-out;																	// animation timing function
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%anim-pulse {
+	animation-duration: 		$anim-pulse-duration;
+	animation-delay: 			$anim-pulse-delay;
+	animation-timing-function: 	$anim-pulse-timing;
+	animation-iteration-count: 	infinite;
+	animation-name: 			pulse;
+
+	&.-once { animation-iteration-count: 1; }
+}
+
+// ======================================================================================================= CLASSES
+
+.-pulse { @extend %anim-pulse; }
+
+// ======================================================================================================= ANIMATIONS
+
+@keyframes pulse {
+	0%   { @include scale( 1, 1 ); }
+	50%  { @include scale( 1.1, 1.1 ); }
+	100% { @include scale( 1, 1 ); }
+}
+
+@-webkit-keyframes pulse {
+	0%   { @include scale( 1, 1 ); }
+	50%  { @include scale( 1.1, 1.1 ); }
+	100% { @include scale( 1, 1 ); }
+}

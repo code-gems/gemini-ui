@@ -1,0 +1,193 @@
+
+// ======================================================================================================= FUNCTIONS
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+// ======================================================================================================= FLEX
+
+@mixin display-flex() {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+@mixin display-inline-flex {
+	display: -webkit-inline-box;
+	display: -webkit-inline-flex;
+	display: -moz-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+}
+
+@mixin flex-flow( $flow: (row nowrap) ) {
+	-webkit-flex-flow: $flow;
+	   -moz-flex-flow: $flow;
+		-ms-flex-flow: $flow;
+			flex-flow: $flow;
+}
+
+@mixin flex( $value: (1 1 auto) ) {
+	-webkit-flex: $value;
+	   -moz-flex: $value;
+		-ms-flex: $value;
+			flex: $value;
+}
+
+@mixin justify-content( $value ) {
+	-webkit-justify-conten: $value;
+	   -moz-justify-conten: $value;
+		-ms-justify-conten: $value;
+			justify-conten: $value;
+}
+
+// ======================================================================================================= FONT
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+// ======================================================================================================= BORDER
+
+@mixin round($value: 50%) {
+  -webkit-border-radius: $value;
+	 -moz-border-radius: $value;
+	  -ms-border-radius: $value;
+		  border-radius: $value;
+}
+
+@mixin border-box() {
+  -webkit-box-sizing: border-box;
+	 -moz-box-sizing: border-box;
+		  box-sizing: border-box;
+}
+
+// ======================================================================================================= TRANSFORM
+
+@mixin scale($x, $y:$x){
+  -webkit-transform: scale($x, $y);
+	 -moz-transform: scale($x, $y);
+	  -ms-transform: scale($x, $y);
+		  transform: scale($x, $y);
+}
+
+@mixin translate($x, $y){
+  -webkit-transform: translate($x, $y);
+	 -moz-transform: translate($x, $y);
+	  -ms-transform: translate($x, $y);
+		  transform: translate($x, $y);
+}
+
+@mixin translateX($x){
+  -webkit-transform: translateX($x);
+	 -moz-transform: translateX($x);
+	  -ms-transform: translateX($x);
+		  transform: translateX($x);
+}
+
+@mixin translateY($y){
+  -webkit-transform: translateY($y);
+	 -moz-transform: translateY($y);
+	  -ms-transform: translateY($y);
+		  transform: translateY($y);
+}
+
+@mixin skewX($deg){
+  -webkit-transform: skewX($deg);
+	 -moz-transform: skewX($deg);
+	  -ms-transform: skewX($deg);
+		  transform: skewX($deg);
+}
+
+@mixin skewY($deg){
+  -webkit-transform: skewY($deg);
+	 -moz-transform: skewY($deg);
+	  -ms-transform: skewY($deg);
+		  transform: skewY($deg);
+}
+
+@mixin skew($degx, $degy: 0){
+  -webkit-transform: skew($degx, $degy);
+	 -moz-transform: skew($degx, $degy);
+	  -ms-transform: skew($degx, $degy);
+		  transform: skew($degx, $degy);
+}
+
+// ======================================================================================================= TRANSITION
+
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+	 -moz-transition: $transition;
+	  -ms-transition: $transition;
+		  transition: $transition;
+}
+
+@mixin transition-property($property...) {
+  -webkit-transition-property: $property;
+	 -moz-transition-property: $property;
+	  -ms-transition-property: $property;
+		  transition-property: $property;
+}
+
+@mixin transition-duration($duration...) {
+  -webkit-transition-property: $duration;
+	 -moz-transition-property: $duration;
+	  -ms-transition-property: $duration;
+		  transition-property: $duration;
+}
+
+@mixin transition-timing-function($timing...) {
+  -webkit-transition-timing-function: $timing;
+	 -moz-transition-timing-function: $timing;
+	  -ms-transition-timing-function: $timing;
+		  transition-timing-function: $timing;
+}
+
+@mixin transition-delay($delay...) {
+  -webkit-transition-delay: $delay;
+	 -moz-transition-delay: $delay;
+	  -ms-transition-delay: $delay;
+		  transition-delay: $delay;
+}
+
+// ======================================================================================================= ANIMATION
+
+@mixin animation-fill-mode($mode...) {
+  -webkit-animation-fill-mode: $mode;
+	 -moz-animation-fill-mode: $mode;
+	  -ms-animation-fill-mode: $mode;
+		  animation-fill-mode: $mode;
+}
+
+// ======================================================================================================= MISCELLANEOUS
+
+@mixin unselectable(){
+  -webkit-user-select: none;
+	 -moz-user-select: none;
+	  -ms-user-select: none;
+		  user-select: none;
+}
+
+@mixin shadow($params...) {
+  -webkit-box-shadow: $params;
+	 -moz-box-shadow: $params;
+	  -ms-box-shadow: $params;
+		  box-shadow: $params;
+}
+
+@mixin draw( $txt, $bg, $br: $bg ) {
+	color: 					$txt;
+	background-color: 		$bg;
+	border-color:			$br;
+
+	svg, .spinner {
+		fill: 					$txt;
+		stroke: 				$txt;
+	}
+}

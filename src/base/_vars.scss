@@ -1,0 +1,26 @@
+// ======================================================================================================= BASE FONT SIZES FOR DESKTOP & MOBILE
+
+$desktop-font-size:				16px;																	// desktop - base font size
+$desktop-line-hight:			150%;																	// desktop - base line height
+$desktop-font-family:			"Brown Regular";														// desktop - base font family
+
+$mobile-font-size:				18px;																	// mobile - base font size
+$mobile-line-hight:				150%;																	// mobile - base line height
+$mobile-font-family:			"Brown Regular";														// mobile - base font family
+
+// ======================================================================================================= DEFAULTS
+
+$default-height: 				48px;																	// default component hight e.g. button
+
+// ======================================================================================================= BASE PADDING & MARGIN
+
+$base-padding: 					30px;																	// base padding
+$base-margin: 					30px;																	// base margin
+
+// ======================================================================================================= SCREEN SIZES
+
+$screen-size-xl:				1920px;
+$screen-size-l:					1440px;
+$screen-size-m:					1024px;
+$screen-size-s:					768px;
+$screen-size-xs:				480px;

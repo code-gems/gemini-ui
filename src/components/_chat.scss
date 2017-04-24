@@ -1,0 +1,118 @@
+// ======================================================================================================= VARS
+
+$chat-bubble-alt-color-txt:	$base-color-txt;
+$chat-bubble-alt-color-bg:	#cceceb;
+
+$chat-default-height: 		$default-height; 															// chat - default height
+$chat-default-height-s:		$default-height / 1.5;														// chat - default height [SMALL]
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%chat-list {
+	display: 				block;
+	width: 					100%;
+	padding: 				0 $base-padding / 2;
+
+	.chat-bubble {
+		position:				relative;
+		display: 				block;
+		width: 					100%;
+		margin-bottom: 			$base-margin / 2;
+
+		color: 					$base-color-txt;
+
+		@include 				round( $chat-default-height / 2 );
+
+		background-color: 		darken( $base-color-bg, 5% );
+		border-left-color: 		darken( $base-color-bg, 5% );
+		border-right-color: 	darken( $base-color-bg, 5% );
+
+		&:last-child { margin-bottom: 0; }
+
+		&:before {
+			position: 				absolute;
+			display: 				block;
+			width: 					0;
+			height: 				0;
+			margin-top: 			-$chat-default-height / 4;
+			content: 				" ";
+			top: 					50%;
+			right: 					100%;
+
+			pointer-events: 		none;
+
+			border: 				solid transparent;
+
+			border-right-color: 	inherit;
+			border-width: 			$chat-default-height / 4;
+		}
+
+		.chat-row {
+			display: 				table;
+			width: 					100%;
+
+			.chat-cell {
+				display: 				table-cell;
+				text-align: 			left;
+    			vertical-align: 		middle;
+				padding: 				0 $base-padding / 2;
+
+				&.-icon {
+					width:					$chat-default-height;
+					height:					$chat-default-height;
+					padding: 				0;
+
+					text-align: 			center;
+					vertical-align: 		middle;
+					line-height: 			$chat-default-height;
+					font-size: 				110%;
+
+					& + .chat-cell { padding-left: 0; }
+				}
+			} //-- end of .chat-cell
+
+			&.-small {
+				font-size: 				0.66667em;
+
+				.-icon {
+					width:					$chat-default-height-s;
+					height:					$chat-default-height-s;
+					line-height: 			$chat-default-height-s;
+				}
+			}
+
+		} //-- end of .chat-row
+
+		&.-alt {
+			color: 					$chat-bubble-alt-color-txt;
+			background-color: 		$chat-bubble-alt-color-bg;
+			border-left-color: 		$chat-bubble-alt-color-bg;
+			border-right-color: 	$chat-bubble-alt-color-bg;
+
+			&:before {
+				left: 					100%;
+				right: 					auto;
+				border-right-color: 	transparent;
+				border-left-color: 		inherit;
+			}
+		} //-- end of .-alter
+
+		&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg ) }
+		&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg ) }
+		&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg ) }
+		&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg ) }
+
+		&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg ) }
+		&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg ) }
+		&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg ) }
+		&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg ) }
+
+	} //-- end of .chat-bubble
+
+}
+
+//================================================================================ CLASSES
+
+.chat-list { @extend %chat-list; }
+
+//================================================================================ RESPONSIVE

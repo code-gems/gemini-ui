@@ -1,59 +1,60 @@
-//================================================================================ VARS
+// ======================================================================================================= VARS
+// vars can be moved to base/_vars.scss file in case of supporting multiple themes
 
-$grid-columns: 				12;													// button default height
+$grid-columns: 						12;																	// number of columns in a grid
 
-//================================================================================ TEMPLATES & MIXINS
+// ======================================================================================================= TEMPLATES & MIXINS
 
 %clearfix {
-	&:before, &:after {
-		display: 				table;
-		content: 				" ";
-	}
-
-	&:after {
-		clear: 					both;
-	}
+	&:before, &:after { display: table; content: " "; }
+	&:after { clear: both; }
 }
 
-%grid-cell {
-	position: 				relative;
-	display: 				block;
-	float: 					left;
-
-	border: 				1px solid #ccc;
-	box-sizing: 			border-box;
+%row {
+	@include 				display-flex();
+	@include 				border-box();
+	width:					100%;
 }
 
-@mixin grid-base( $size ) {
-	width:  ( 100% / $grid-columns ) * $size;
+%cell {
+	@include 				flex( 0 0 auto );
+	@include 				border-box();
 }
 
-//================================================================================ CLASSES
-
-@for $i from 1 through $grid-columns {
-	.-xs#{$i}, .-s#{$i}, .-m#{$i}, .-l#{$i}, .-xl#{$i} {
-		@include grid-base( $i );
-		@extend %grid-cell;
-	}
-
+@mixin cell-width( $size ) {
+	$proc:					( 100% / $grid-columns ) * $size;
+	@include 				flex( 0 0 $proc );
+	width:   				$proc;
 }
+
+// ======================================================================================================= CLASSES
 
 .row {
-	display: 				block;
-	width: 					100%;
-
+	@extend %row;
 	@extend %clearfix;
 }
 
-//================================================================================ RESPONSIVE
+@for $i from 1 through $grid-columns {
+	.-xs#{$i}, .-s#{$i}, .-m#{$i}, .-l#{$i}, .-xl#{$i} {
+		@extend %cell;
+	}
 
-@media screen and ( max-width: $screen-max-xs ) {
+}
+
+// ======================================================================================================= RESPONSIVE
+
+@media all and ( max-width: $screen-size-l ) {
 
 	@for $i from 1 through $grid-columns {
-		.-xs#{$i}, .-s#{$i}, .-m#{$i}, .-l#{$i}, .-xl#{$i} {
-			@include grid-base( $i );
-			@extend %grid-cell;
-		}
+		.-l#{$i} { @include cell-width( $i ); }
+	}
+
+}
+
+@media all and ( max-width: $screen-size-m ) {
+
+	@for $i from 1 through $grid-columns {
+		.-m#{$i} { @include cell-width( $i ); }
 	}
 
 }

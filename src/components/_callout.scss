@@ -1,0 +1,61 @@
+// ======================================================================================================= VARS
+
+$callout-height:			$default-height;
+$callout-border-size: 		2px;
+$callout-padding: 			($callout-height - $desktop-font-size) / 2 - ($callout-border-size * 2);
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%callout {
+	display: 				table;
+	width: 					100%;
+	min-height: 			$callout-height;
+	margin-bottom:			$base-margin / 2;
+
+	text-align: 			left;
+	font-size: 				$desktop-font-size;
+	border: 				$callout-border-size solid;
+
+	@include 				draw( $base-color-txt, $base-color-bg, $base-color-br );
+	@include 				round( 3px );
+	box-sizing: 			border-box;
+
+	&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-br ) }
+	&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-br ) }
+	&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-br ) }
+	&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-br ) }
+
+	&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg, $action-success-br ); }
+	&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg, 	$action-info-br ); }
+	&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg, $action-warning-br ); }
+	&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg, 	$action-danger-br ); }
+
+	.callout-row {
+		display: 				table;
+		width: 					100%;
+	}
+	
+	.callout-cell {
+		display: 				table-cell;
+		padding: 				$callout-padding ($base-padding / 2);
+		text-align: 			left;
+		vertical-align: 		middle;
+		line-height: 			120%;
+
+		&.-icon {
+			width: 					$callout-height;
+			height:					$callout-height;
+			line-height:			$callout-height;
+			text-align: 			center;
+			font-size: 				120%;
+			padding: 				0;
+
+			& + .callout-cell { padding-left: 0; }
+		}
+	}
+
+}
+
+// ======================================================================================================= CLASSES
+
+.callout { @extend %callout; }

@@ -1,0 +1,76 @@
+// =============================================================================== VARS
+
+// ...
+
+// =============================================================================== TEMPLATE
+
+%system-modal {
+	position: 				absolute;
+	display: 				table;
+	width: 					100%;
+	height: 				100%;
+	padding: 				0;
+	opacity: 				1;
+	top: 					0;
+	left: 					0;
+
+	background-color: 		$base-color-bg;
+	@include 				animation-fill-mode( forwards );
+
+	z-index: 				9999;
+
+	&.-show {
+		opacity: 1;
+	}
+
+	&.-hide {
+		-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+		-webkit-animation-duration: 0.4s;
+				animation-duration: 0.4s;
+	}
+
+	.system-modal-spinner {
+		display: 				table-cell;
+		width: 					100%;
+		height: 				100px;
+
+		vertical-align: 		middle;
+		text-align: 			center;
+	}
+
+	.modal-logo {
+		display: 				block;
+		width: 					50%;
+		margin: 				0 auto;
+	}
+
+	&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-txt ) }
+	&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-txt ) }
+	&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-txt ) }
+	&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-txt ) }
+
+	&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg, $action-success-txt ) }
+	&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg, 	$action-info-txt ) }
+	&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg, $action-warning-txt ) }
+	&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg, 	$action-danger-txt ) }
+
+}
+
+// =============================================================================== CLASSES
+
+.system-modal { @extend %system-modal; }
+
+// =============================================================================== ANIMATIONS
+
+@-webkit-keyframes fadeOut {
+	0% { opacity: 1 }
+	99% { left: 0 }
+	100% { opacity: 0; left: -200% }
+}
+
+@keyframes fadeOut {
+	0% { opacity: 1 }
+	99% { left: 0 }
+	100% { opacity: 0; left: -200% }
+}

@@ -1,0 +1,102 @@
+// ======================================================================================================= VARS
+
+$list-item-height: 			$default-height;
+$list-item-height-s:		$default-height / 1.5;
+$list-item-border-size: 	1px;
+$list-icon-padding: 		($list-item-height - $desktop-font-size) / 2;
+$list-icon-padding-s: 		($list-item-height-s - ($desktop-font-size / 1.5)) / 2;
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%list {
+	position:				relative;
+	display:				block;
+	margin: 				0;
+	padding: 				0;
+
+	&.-mobile { max-width: 414px; }
+
+	.ls-item {
+		display: 				table;
+		width: 					100%;
+		min-height: 			$list-item-height;
+
+		border-bottom: 			$list-item-border-size solid darken( $base-color-bg, 10% );
+
+		@include draw( $base-color-txt, $base-color-bg, darken( $base-color-bg, 10% ) );
+
+		&:first-child { border-top: $list-item-border-size solid darken( $base-color-bg, 10% ) }
+
+		.ls-row {
+			display: 				table;
+			width: 					100%;
+
+			&.-small {
+				.ls-cell {
+					font-size: 				0.66667em;
+					padding: 				$list-icon-padding-s ($base-padding / 3);
+
+					&.-icon {
+						width:					$list-item-height-s;
+						height:					$list-item-height-s;
+						line-height: 			$list-item-height-s;
+						padding: 				0;
+					}
+				}
+			}
+
+		} //-- end of .ls-row
+
+		.ls-cell {
+			display: 				table-cell;
+			padding: 				$list-icon-padding ($base-padding / 2);
+
+			text-align: 			left;
+			vertical-align: 		middle;
+			line-height: 			120%;
+
+			&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-br ) }
+			&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-br ) }
+			&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-br ) }
+			&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-br ) }
+
+			&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg, $action-success-br ); }
+			&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg, 	$action-info-br ); }
+			&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg, $action-warning-br ); }
+			&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg, 	$action-danger-br ); }
+			&.-disabled { @include draw( $btn-disable-txt, 		$btn-disable-bg, 	$btn-disable-br ); }
+
+			&.-icon {
+				width: 					$list-item-height;
+				height: 				$list-item-height;
+				line-height:			$list-item-height;
+				text-align: 			center;
+				vertical-align: 		middle;
+				font-size: 				110%;
+				padding: 				0;
+
+				& + .ls-cell { padding-left: 0; }
+			}
+
+		} //-- end of .ls-cell
+
+		&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-br ) }
+		&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-br ) }
+		&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-br ) }
+		&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-br ) }
+
+		&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg, $action-success-br ); }
+		&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg, 	$action-info-br ); }
+		&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg, $action-warning-br ); }
+		&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg, 	$action-danger-br ); }
+		&.-disabled { @include draw( $btn-disable-txt, 		$btn-disable-bg, 	$btn-disable-br ); }
+
+	} //-- end of .ls-list
+
+}
+
+//================================================================================ CLASSES
+
+.list { @extend %list; }
+
+//================================================================================ RESPONSIVE

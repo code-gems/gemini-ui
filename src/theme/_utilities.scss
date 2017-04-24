@@ -1,0 +1,56 @@
+// ======================================================================================================= TEXT ALIGNMENT & SIZE
+
+.-txt-center 	{ text-align: center !important; }
+.-txt-left  	{ text-align: left !important; }
+.-txt-right		{ text-align: right !important; }
+.-txt-justify 	{ text-align: justify !important; }
+
+.-txt-xl { font-size: 1.5em; }
+.-txt-l  { font-size: 1.3em; }
+.-txt-m  { font-size: 1em; }
+.-txt-s  { font-size: .8em; }
+.-txt-xs { font-size: .5em; }
+
+// ======================================================================================================= PADDING & MARGIN
+
+.-pad-xl { padding: $base-padding * 4; }
+.-pad-l  { padding: $base-padding * 2; }
+.-pad-m  { padding: $base-padding; }
+.-pad-s  { padding: $base-padding / 2; }
+.-pad-xs { padding: $base-padding / 4; }
+.-no-pad { padding: 0 !important; }
+.-no-pad-left { padding-left: 0 !important; }
+.-no-pad-right { padding-right: 0 !important; }
+
+.-marg-xl { margin: $base-margin * 4; }
+.-marg-l  { margin: $base-margin * 2; }
+.-marg-m  { margin: $base-margin; }
+.-marg-s  { margin: $base-margin / 2; }
+.-marg-xs { margin: $base-margin / 4; }
+.-no-marg { margin: 0 !important; }
+
+// ======================================================================================================= BLOCK ALIGNMENT
+
+.-right  { float: right; }
+.-left   { float: left; }
+.-center {
+	display: 				block;
+	margin: 				0 auto;
+	float: 					none !important;
+}
+
+// ======================================================================================================= COLOR MODIFICATIONS
+
+.bg-default 	{ @include draw( $base-color-txt, 		$base-color-bg, 		$base-color-br ); }
+.bg-primary 	{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-br ); }
+.bg-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-br ); }
+.bg-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-br ); }
+.bg-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-br ); }
+
+.bg-light    { background-color: rgba(255, 255, 255, .1); }
+.bg-lighter  { background-color: rgba(255, 255, 255, .2); }
+.bg-lightest { background-color: rgba(255, 255, 255, .3); }
+
+.bg-dark    { background-color: rgba(0, 0, 0, .1); }
+.bg-darker  { background-color: rgba(0, 0, 0, .2); }
+.bg-darkest { background-color: rgba(0, 0, 0, .3); }

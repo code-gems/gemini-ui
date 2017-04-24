@@ -1,0 +1,114 @@
+// ======================================================================================================= OVERRIDES
+
+// ...
+
+// ======================================================================================================= ION BAR
+
+.bar {
+	height: 				$default-height;
+	padding: 				0;
+
+	background-image: 		none !important;
+
+	.title {
+		height: 				$default-height;
+		line-height: 			$default-height;
+	}
+
+	&.bar-primary {
+		color: 					$brand-primary-txt !important;
+		background-color: 		$brand-primary-bg !important;
+	}
+
+	&.bar-secondary {
+		color: 					$brand-secondary-txt !important;
+		background-color: 		$brand-secondary-bg !important;
+	}
+
+	&.bar-tertiary {
+		color: 					$brand-tertiary-txt !important;
+		background-color: 		$brand-tertiary-bg !important;
+	}
+
+	&.bar-quaternary {
+		color: 					$brand-quaternary-txt !important;
+		background-color: 		$brand-quaternary-bg !important;
+	}
+
+	&.bar-success {
+		color: 					$action-success-txt !important;
+		background-color: 		$action-success-bg !important;
+	}
+
+	&.bar-info {
+		color: 					$action-info-txt !important;
+		background-color: 		$action-info-bg !important;
+	}
+
+	&.bar-warning {
+		color: 					$action-warning-txt !important;
+		background-color: 		$action-warning-bg !important;
+	}
+
+	&.bar-danger {
+		color: 					$action-danger-txt !important;
+		background-color: 		$action-danger-bg !important;
+	}
+}
+
+.bar-header {
+	@include 				shadow( 0 2px 5px rgba(0,0,0,0.1) );
+
+	.header-item {
+
+		.btn {
+			padding: 0 $base-padding / 3;
+			&.-icon { padding: 0; }
+		}
+
+		&.buttons.buttons-right {
+			top: 					0;
+			right: 					0;
+			bottom: 				0;
+		}
+	}
+
+}
+
+.bar-subheader {
+	top: 					$default-height;
+	height: 				$default-height;
+}
+
+.bar-footer {
+	height: 				$default-height;
+	padding: 				0;
+
+	.btn {
+		height: 48px !important;
+		padding: 0 15px !important;
+		line-height: 48px !important;
+		font-size: 16px !important;
+	}
+}
+
+
+// ======================================================================================================= ION CONTENT
+
+ion-content {
+	background-color: 		$content-color-bg;
+
+	&.has-header 	{ top: $default-height; }
+	&.has-subheader { top: $default-height * 2; }
+	&.has-footer 	{ bottom: $default-height; }
+	&.has-subfooter { bottom: $default-height * 2; }
+}
+
+// ======================================================================================================= ION CHECK BOX
+
+label.item-checkbox {
+	.item-content {
+		padding: 				0 0 0 $default-height / 2;
+    	font-size: 				.9em;
+	}
+}

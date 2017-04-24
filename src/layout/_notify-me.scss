@@ -1,0 +1,179 @@
+// ======================================================================================================= VARS
+
+// ...
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%notify-me {
+	position: 				fixed;
+	display: 				none;
+	width: 					100%;
+	max-width: 				480px;
+	top: 					0;
+	right: 					0;
+
+	padding: 				15px 15px 15px 25px;
+	color: 					$brand-secondary-txt;
+
+	background-color: 		$brand-secondary-bg;
+	z-index: 				1000;
+
+	-webkit-transform-origin: 50% 0%;
+			transform-origin: 50% 0%;
+
+	backface-visibility: 	hidden;
+	-webkit-animation-duration: 1s;
+			animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+			animation-fill-mode: both;
+
+
+
+	&.-show {
+		display: 				block !important;
+
+		-webkit-animation-name: flipInX;
+				animation-name: flipInX;
+	}
+
+	&.-hide {
+		display: 				block !important;
+		-webkit-animation-name: flipInXSimple;
+				animation-name: flipInXSimple;
+		-webkit-animation-duration: 0.4s;
+				animation-duration: 0.4s;
+		-webkit-animation-direction: reverse;
+				animation-direction: reverse;
+	}
+
+	&.-success {
+		color: 					$action-success-txt;
+		background-color: 		$action-success-bg;
+	}
+
+	&.-info {
+		color: 					$action-info-txt;
+		background-color: 		$action-info-bg;
+	}
+
+	&.-warning {
+		color: 					$action-warning-txt;
+		background-color: 		$action-warning-bg;
+	}
+
+	&.-error {
+		color: 					$action-danger-txt;
+		background-color: 		$action-danger-bg;
+	}
+
+}
+
+// ======================================================================================================= CLASSES
+
+.notify-me { @extend %notify-me; }
+.nm-title {
+	font-weight: bold;
+}
+.nm-cont {
+	margin-right:15px;
+}
+.nm-wrap {
+	display: flex;
+	align-items: top;
+}
+.nm-icon {
+	font-size:30px;
+	margin-right:10px;
+}
+.nm-btn-close {
+	margin-left:auto;
+	font-size:20px;
+}
+// ======================================================================================================= ANIMATIONS
+
+
+@-webkit-keyframes flipInX {
+	0% {
+		-webkit-transform: perspective(400px) rotate3d(1,0,0,-90deg);
+		-webkit-transition-timing-function: ease-in;
+	}
+
+	40% {
+		-webkit-transform: perspective(400px) rotate3d(1,0,0,20deg);
+		-webkit-transition-timing-function: ease-out;
+	}
+
+	60% {
+		-webkit-transform: perspective(400px) rotate3d(1,0,0,-10deg);
+		-webkit-transition-timing-function: ease-in;
+		opacity: 1;
+	}
+
+	80% {
+		-webkit-transform: perspective(400px) rotate3d(1,0,0,5deg);
+		-webkit-transition-timing-function: ease-out;
+	}
+
+	100% {
+		-webkit-transform: perspective(400px);
+	}
+}
+
+@keyframes flipInX {
+	0% {
+		-webkit-transform: perspective(400px) rotate3d(1,0,0,-90deg);
+		transform: perspective(400px) rotate3d(1,0,0,-90deg);
+		-webkit-transition-timing-function: ease-in;
+		transition-timing-function: ease-in;
+	}
+
+	40% {
+		-webkit-transform: perspective(400px) rotate3d(1,0,0,20deg);
+		transform: perspective(400px) rotate3d(1,0,0,20deg);
+		-webkit-transition-timing-function: ease-out;
+		transition-timing-function: ease-out;
+	}
+
+	60% {
+		-webkit-transform: perspective(400px) rotate3d(1,0,0,-10deg);
+		transform: perspective(400px) rotate3d(1,0,0,-10deg);
+		-webkit-transition-timing-function: ease-in;
+		transition-timing-function: ease-in;
+		opacity: 1;
+	}
+
+	80% {
+		-webkit-transform: perspective(400px) rotate3d(1,0,0,5deg);
+		transform: perspective(400px) rotate3d(1,0,0,5deg);
+		-webkit-transition-timing-function: ease-out;
+		transition-timing-function: ease-out;
+	}
+
+	100% {
+		-webkit-transform: perspective(400px);
+		transform: perspective(400px);
+	}
+}
+
+@-webkit-keyframes flipInXSimple {
+  0% {
+	-webkit-transform: perspective(400px) rotate3d(1, 0, 0, -90deg);
+	-webkit-transition-timing-function: ease-in;
+  }
+  100% {
+	-webkit-transform: perspective(400px);
+  }
+}
+
+@keyframes flipInXSimple {
+  0% {
+	-webkit-transform: perspective(400px) rotate3d(1, 0, 0, -90deg);
+	transform: perspective(400px) rotate3d(1, 0, 0, -90deg);
+	-webkit-transition-timing-function: ease-in;
+	transition-timing-function: ease-in;
+  }
+  100% {
+	-webkit-transform: perspective(400px);
+	transform: perspective(400px);
+  }
+}

@@ -1,0 +1,34 @@
+// ======================================================================================================= VARS
+
+$text-area-height:			$default-height;
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%text-area  {
+	width: 					100%;
+	min-height:				$text-area-height;
+	padding: 				$base-padding / 2;
+
+	color: 					$base-color-txt;
+	line-height: 			1.5em;
+	font-family: 			$desktop-font-family;
+	font-size: 				$desktop-font-size;
+	outline: 				none;
+	resize: 				none;
+
+	border: 				none;
+	background-color: 		darken( $base-color-bg, 2% );
+
+	&.-glass { background-color: transparent; }
+
+	&.-white-ph {
+		&::-webkit-input-placeholder 	{ color: lighten( $brand-primary-txt, 10% ) }
+		&::-moz-placeholder 			{ color: lighten( $brand-primary-txt, 10% ) }
+		&:-ms-input-placeholder 		{ color: lighten( $brand-primary-txt, 10% ) }
+		&:-moz-placeholder 				{ color: lighten( $brand-primary-txt, 10% ) }
+	}
+}
+
+// ======================================================================================================= CLASSES
+
+textarea { @extend %text-area; }

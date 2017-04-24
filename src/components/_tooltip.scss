@@ -1,0 +1,65 @@
+// ======================================================================================================= VARS
+
+$tt-height:					$default-height;
+$tt-padding: 				($tt-height - $desktop-font-size) / 2;
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+@mixin draw-tt( $txt, $bg ) {
+	color: 					$txt;
+	background-color: 		$bg;
+	&:after { border-bottom-color: $bg; }
+}
+
+%tooltip {
+	position: 				absolute;
+	display: 				none;
+	min-height: 			$input-height;
+	padding: 				$tt-padding ($base-padding / 2);
+	top: 					100%;
+	left: 					0;
+	right: 					0;
+
+	@include 				draw-tt( $base-color-txt, $base-color-bg );
+	z-index: 				1;
+
+	&.-show { display: table; }
+
+	&.-full { width: 100%; }
+
+	&.tt-cell {
+		display: 				table-cell;
+		padding: 				$base-padding / 3 $base-padding / 2;
+	}
+
+	&.-primary 		{ @include draw-tt( $brand-primary-txt, 	$brand-primary-bg ) }
+	&.-secondary 	{ @include draw-tt( $brand-secondary-txt, 	$brand-secondary-bg ) }
+	&.-tertiary 	{ @include draw-tt( $brand-tertiary-txt, 	$brand-tertiary-bg ) }
+	&.-quaternary 	{ @include draw-tt( $brand-quaternary-txt, 	$brand-quaternary-bg ) }
+
+	&.-success 	{ @include draw-tt( $action-success-txt, 	$action-success-bg ) }
+	&.-info 	{ @include draw-tt( $action-info-txt, 		$action-info-bg ) }
+	&.-warning 	{ @include draw-tt( $action-warning-txt, 	$action-warning-bg ) }
+	&.-danger 	{ @include draw-tt( $action-danger-txt, 	$action-danger-bg ) }
+
+	&:after {
+		position: 				absolute;
+		display: 				block;
+		width: 					0;
+		height: 				0;
+		margin-left: 			-10px;
+		bottom: 				100%;
+		left: 					50%;
+		content: 				" ";
+
+		pointer-events: 		none;
+		border-color: 			transparent;
+		border: 				solid transparent;
+		// border-bottom-color: 	$action-danger-bg;
+		border-width: 			10px;
+	}
+}
+
+// ======================================================================================================= CLASSES
+
+.tooltip { @extend %tooltip; }

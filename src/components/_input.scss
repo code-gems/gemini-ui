@@ -1,0 +1,53 @@
+// ======================================================================================================= VARS
+
+$input-height:			$default-height;
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%input {
+	width: 					100%;
+	height: 				$input-height;
+	padding: 				0 $base-padding / 2;
+
+	color: 					$base-color-txt;
+	line-height: 			$input-height;
+	font-family: 			Arial;
+	font-size: 				$desktop-font-size;
+	outline: 				none;
+
+	border: 				none;
+	background-color: 		$base-color-bg;
+
+	&.-glass { background-color: transparent; }
+
+	&.-white-ph {
+		&::-webkit-input-placeholder 	{ color: darken( #fff, 20% ) }
+		&::-moz-placeholder 			{ color: darken( #fff, 20% ) }
+		&:-ms-input-placeholder 		{ color: darken( #fff, 20% ) }
+		&:-moz-placeholder 				{ color: darken( #fff, 20% ) }
+	}
+
+	&.-black-ph {
+		&::-webkit-input-placeholder 	{ color: lighten( #000, 20% ) }
+		&::-moz-placeholder 			{ color: lighten( #000, 20% ) }
+		&:-ms-input-placeholder 		{ color: lighten( #000, 20% ) }
+		&:-moz-placeholder 				{ color: lighten( #000, 20% ) }
+	}
+}
+
+// ======================================================================================================= CLASSES
+
+input[type=color],
+input[type=date],
+input[type=datetime-local],
+input[type=datetime],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week] { @extend %input; }
