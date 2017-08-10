@@ -1,0 +1,91 @@
+// ======================================================================================================= VARS
+
+$table-item-height: 		$default-height;
+$table-item-height-s:		$default-height / 1.5;
+$table-item-border-size: 	1px;
+$table-icon-padding: 		($table-item-height - $desktop-font-size) / 2;
+$table-icon-padding-s: 		($table-item-height-s - ($desktop-font-size / 1.5)) / 2;
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%table {
+	position:				relative;
+	display:				block;
+	width: 					100%;
+	margin: 				0;
+	padding: 				0;
+
+	@include 				draw( $content-color-txt, $content-color-bg, $content-color-br );
+	@include 				round( 3px );
+
+	&.-mobile { max-width: 414px; }
+	&.-no-border .row { border: none !important; }
+
+	.row {
+		position: 				relative;
+		width: 					100%;
+		min-height: 			$table-item-height;
+		margin: 				0;
+
+		border-bottom: 			$table-item-border-size solid;
+		border-color: 			inherit;
+
+		&:first-child {
+			border-top: 			$table-item-border-size solid;
+			border-color: 			inherit;
+		}
+
+		&:nth-child(2n) {
+			@include 				draw( $content-color-txt, darken( $content-color-bg, 10% ), $content-color-br );
+		}
+
+		&.-no-border { border: none !important; }
+
+		&.-footer {
+			@include 				draw( $content-color-bg, $content-color-txt, $content-color-br );
+		}
+
+		&.-small {
+			.cell, [class^="cell-"], [class*=" cell-"] {
+				font-size: 				0.66667em;
+				padding: 				$table-icon-padding-s ($base-padding / 3);
+
+				&.-icon {
+					width:					$table-item-height-s;
+					height:					$table-item-height-s;
+					line-height: 			$table-item-height-s;
+					padding: 				0;
+				}
+			}
+		}
+
+		.cell, [class^="cell-"], [class*=" cell-"] {
+			padding: 				$table-icon-padding ($base-padding / 2);
+
+			text-align: 			left;
+			line-height: 			120%;
+
+			&.-icon {
+				width: 					$table-item-height;
+				height: 				$table-item-height;
+				line-height:			$table-item-height;
+				text-align: 			center;
+				font-size: 				120%;
+				padding: 				0;
+
+				& + .cell,
+				& + [class^="cell-"],
+				& + [class*=" cell-"] { padding-left: 0; }
+			}
+
+		} //-- end of .cell
+
+	} //-- end of .row
+
+}
+
+//================================================================================ CLASSES
+
+.table { @extend %table; }
+
+//================================================================================ RESPONSIVE

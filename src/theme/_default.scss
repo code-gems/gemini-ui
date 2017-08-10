@@ -15,7 +15,6 @@
 	font-family: 'Brown Regular';
 	src: url('../fonts/Brown-Regular.eot?#iefix') format('embedded-opentype'),
 		url('../fonts/Brown-Regular.otf')  format('opentype'),
-		url('../fonts/Brown-Regular.woff') format('woff'),
 		url('../fonts/Brown-Regular.ttf')  format('truetype'),
 		url('../fonts/Brown-Regular.svg#Brown-Regular') format('svg');
 	font-weight: 	normal;
@@ -32,7 +31,7 @@ body {
 	color: 					$base-color-txt;
 	font-size:				$desktop-font-size;
 	font-family: 			$desktop-font-family;
-	line-height: 			$desktop-line-hight;
+	line-height: 			$mobile-line-hight;
 
 	background-color: 		$base-color-bg;
 }
@@ -43,8 +42,77 @@ p {
 	margin-bottom:			$base-margin / 2;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	color: 					inherit;
+a {
+	color: 					$base-color-link;
+	text-decoration: 		none;
+
+	&:hover { color: $base-color-link-hover; }
 }
 
+h1, h2, h3, h4, h5, h6 {
+	color: 					inherit;
+	font-family: 			'Miller Banner';
+}
+
+// h1 { font-size: $desktop-font-size; }
+// h2 { font-size: $desktop-font-size; }
+// h3 { font-size: $desktop-font-size; }
+// h4 { font-size: $desktop-font-size; }
+// h5 { font-size: $desktop-font-size; }
+// h6 { font-size: $desktop-font-size; }
+
 // ======================================================================================================= MISCELLANEOUS
+
+.bg-welcome-page, .bg-log-in-form, .bg-home-page {
+	background-size: 		cover;
+	background-position: 	center center;
+}
+.bg-welcome-page 	{	background-image: url("../img/welcome-page-bg.jpg"); }
+.bg-log-in-form 	{	background-image: url("../img/log-in-form-bg.png"); }
+.bg-home-page 		{	background-image: url("../img/home-page-bg.png"); }
+
+.wp-logo {
+	display: 				block;
+	width: 					80%;
+    margin: 				10% auto 20% auto;
+}
+
+.wp-menu {
+	background-color: 		#1db5c4;
+	background-image: 		url('../img/wp-menu-bg.jpg');
+	background-position: 	bottom center;
+	background-repeat: 		repeat-x;
+    background-size: 		auto 100%;
+}
+
+.qr-code {
+	display: 				block;
+	margin: 				0 auto;
+	width: 					256px;
+}
+
+.btn-scroll-down {
+	position: 				absolute;
+	margin-top: 			-53px;
+	right: 					5px;
+
+	&.hide-me { right: -100px; }
+
+	@include 				transition( right .8s ease );
+	@include 				shadow( 0 1px 2px rgba(0,0,0,.3) );
+}
+
+.rate {
+	color: 					#e4e4e4;
+	font-size: 				42px;
+	&.-active {
+		color: 					#ffbe00;
+		text-shadow: 			0 0 5px rgba( #ffbe00, .75);
+	}
+}
+
+.-custom-yellow .ls-item { @include draw( #454545, #faedca, #faedca ); }
+
+.-html {
+	p { margin: 0 !important; }
+}

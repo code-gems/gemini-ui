@@ -19,11 +19,11 @@
 
 	z-index: 				9999;
 
-	&.-show {
+	&.show-me {
 		opacity: 1;
 	}
 
-	&.-hide {
+	&.hide-me {
 		-webkit-animation-name: fadeOut;
 				animation-name: fadeOut;
 		-webkit-animation-duration: 0.4s;

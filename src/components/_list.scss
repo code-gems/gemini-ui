@@ -3,95 +3,238 @@
 $list-item-height: 			$default-height;
 $list-item-height-s:		$default-height / 1.5;
 $list-item-border-size: 	1px;
-$list-icon-padding: 		($list-item-height - $desktop-font-size) / 2;
+$list-icon-padding: 		($list-item-height - $desktop-font-size) / 2 - ($list-item-border-size * 2);
 $list-icon-padding-s: 		($list-item-height-s - ($desktop-font-size / 1.5)) / 2;
 
 // ======================================================================================================= TEMPLATES & MIXINS
 
+@mixin add-gradient( $color ) {
+	background: -webkit-linear-gradient(top, rgba( $color, 0.4 ) 0%, rgba( $color, 0.2 ) 30%, rgba( $color, 0) 100%);
+	background: 	 -o-linear-gradient(top, rgba( $color, 0.4 ) 0%, rgba( $color, 0.2 ) 30%, rgba( $color, 0) 100%);
+	background:   		linear-gradient(to bottom, rgba( $color, 0.4 ) 0%, rgba( $color, 0.2 ) 30%, rgba( $color, 0) 100%);
+}
+
 %list {
 	position:				relative;
 	display:				block;
+	width: 					100%;
 	margin: 				0;
 	padding: 				0;
 
+	background-color: 		transparent !important;
+
 	&.-mobile { max-width: 414px; }
+	&.-no-border .ls-item { border: none !important; }
+
+	.-underline {
+		border-bottom-width: 	$list-item-border-size;
+		border-bottom-style: 	dashed;
+		border-bottom-color: 	inherit;
+	}
+
+	.ls-thumb, .ls-banner {
+		min-width: 				$list-item-height * 1.5;
+		min-height: 			$list-item-height * 1.5;
+		background-image: 		url('../img/fallback/ls-thumb.png');
+		background-position: 	center center;
+		background-size: 		cover;
+
+		&.-no-img { background-image: none !important; }
+	}
+
+	.ls-thumb {
+		min-width: 				$list-item-height * 1.5;
+	}
+
+	.ls-banner {
+		@include 				display-flex();
+		@include 				align-content( flex-start );
+		min-height: 			120px !important;
+
+		&.-bottom { @include align-content( flex-end ); }
+
+		.cell, [class^="cell-"], [class*=" cell-"] { z-index: 1; }
+
+		&:after {
+			position: 				absolute;
+			display: 				block;
+			width: 					100%;
+			content: 				" ";
+			top: 					0;
+			left: 					0;
+			bottom: 				30%;
+
+			@include 				add-gradient( $base-color-txt );
+			z-index: 				0;
+		}
+
+		p {
+			text-shadow: 			0 1px 5px rgba( $base-color-txt, .75 );
+		}
+
+		.ls-title, .ls-desc { text-shadow: 0 0 15px rgba(0, 0, 0, .6); }
+
+		&.-primary:after	{ @include add-gradient( $brand-primary-bg ); }
+		&.-secondary:after	{ @include add-gradient( $brand-secondary-bg ); }
+		&.-tertiary:after	{ @include add-gradient( $brand-tertiary-bg ); }
+		&.-quaternary:after	{ @include add-gradient( $brand-quaternary-bg ); }
+
+		&.-success:after	{ @include add-gradient( $action-success-bg ); }
+		&.-info:after		{ @include add-gradient( $action-info-bg ); }
+		&.-warning:after	{ @include add-gradient( $action-warning-bg ); }
+		&.-danger:after		{ @include add-gradient( $action-danger-bg ); }
+
+		&.-light:after		{ @include add-gradient( $light-color-bg ); }
+		&.-dark:after		{ @include add-gradient( $dark-color-bg ); }
+	}
+
+	.-ellipsis {
+		display: 				block;
+		overflow: 				hidden;
+		white-space: 			nowrap;
+
+		text-overflow: 			ellipsis;
+	}
+
+	.ls-arrow {
+		position: 				absolute;
+		right: 					5px;
+		top: 					50%;
+		color: 					$brand-primary-bg;
+		@include 				translateY( -50% );
+	}
+
+	.ls-title, .ls-desc, .ls-price {
+		display: 				block;
+		width: 					100%;
+		margin: 				0;
+	}
+	.ls-title + .ls-price {
+		margin-top:				$base-padding / 4;
+	}
+
+	.ls-price {
+		font-family: 			'Miller Banner';
+		font-style: 			italic;
+	}
+
+	.ls-desc {
+		font-size: 				.8em;
+		opacity: 				.9;
+
+
+		&.-ellipsis {
+			height: 				$default-height / 2;
+			line-height: 			$default-height / 2;
+		}
+
+	}
+
+	.-label {
+		padding: 				($base-padding / 6) 0;
+		font-size: 				$desktop-font-size * 0.875;
+	}
 
 	.ls-item {
-		display: 				table;
+		position: 				relative;
 		width: 					100%;
 		min-height: 			$list-item-height;
+		margin: 				0;
 
-		border-bottom: 			$list-item-border-size solid darken( $base-color-bg, 10% );
+		color: 					$content-color-txt;
 
-		@include draw( $base-color-txt, $base-color-bg, darken( $base-color-bg, 10% ) );
+		border-bottom-width: 	$list-item-border-size;
+		border-bottom-style: 	solid;
+		border-color: 			$content-color-br;
 
-		&:first-child { border-top: $list-item-border-size solid darken( $base-color-bg, 10% ) }
+		background-color: 		$content-color-bg;
 
-		.ls-row {
-			display: 				table;
-			width: 					100%;
+		&:first-child {
+			border-top-width: 	$list-item-border-size;
+			border-top-style: 	solid;
+		}
 
-			&.-small {
-				.ls-cell {
-					font-size: 				0.66667em;
-					padding: 				$list-icon-padding-s ($base-padding / 3);
+		.-sideways {
+			@include 				writing-mode( vertical-rl );
+			@include 				text-orientation( sideways );
+		}
 
-					&.-icon {
-						width:					$list-item-height-s;
-						height:					$list-item-height-s;
-						line-height: 			$list-item-height-s;
-						padding: 				0;
-					}
+		&.-no-border { border: none !important; }
+
+		&.-small {
+			.cell, [class^="cell-"], [class*=" cell-"] {
+				font-size: 				0.66667em;
+				padding: 				$list-icon-padding-s ($base-padding / 3);
+
+				&.-icon {
+					width:					$list-item-height-s;
+					height:					$list-item-height-s;
+					line-height: 			$list-item-height-s;
+					padding: 				0;
 				}
 			}
+		}
 
-		} //-- end of .ls-row
-
-		.ls-cell {
-			display: 				table-cell;
+		.cell, [class^="cell-"], [class*=" cell-"] {
 			padding: 				$list-icon-padding ($base-padding / 2);
-
-			text-align: 			left;
-			vertical-align: 		middle;
 			line-height: 			120%;
-
-			&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-br ) }
-			&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-br ) }
-			&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-br ) }
-			&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-br ) }
-
-			&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg, $action-success-br ); }
-			&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg, 	$action-info-br ); }
-			&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg, $action-warning-br ); }
-			&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg, 	$action-danger-br ); }
-			&.-disabled { @include draw( $btn-disable-txt, 		$btn-disable-bg, 	$btn-disable-br ); }
 
 			&.-icon {
 				width: 					$list-item-height;
-				height: 				$list-item-height;
-				line-height:			$list-item-height;
-				text-align: 			center;
-				vertical-align: 		middle;
-				font-size: 				110%;
+				min-height:				$list-item-height;
 				padding: 				0;
 
-				& + .ls-cell { padding-left: 0; }
+				line-height:			$list-item-height;
+				font-size: 				150%;
+
+				& + .cell,
+				& + [class^="cell-"],
+				& + [class*=" cell-"] { padding-left: 0; }
 			}
 
-		} //-- end of .ls-cell
+		} //-- end of .cell
 
-		&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-br ) }
-		&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-br ) }
-		&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-br ) }
-		&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-br ) }
+		&.-primary		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-br ); }
+		&.-secondary	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-br ); }
+		&.-tertiary		{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-br ); }
+		&.-quaternary	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-br ); }
 
-		&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg, $action-success-br ); }
-		&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg, 	$action-info-br ); }
-		&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg, $action-warning-br ); }
-		&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg, 	$action-danger-br ); }
-		&.-disabled { @include draw( $btn-disable-txt, 		$btn-disable-bg, 	$btn-disable-br ); }
+		&.-success	{ @include draw( $action-success-txt, 	$action-success-bg, 	$action-success-br ); }
+		&.-info		{ @include draw( $action-info-txt, 		$action-info-bg, 		$action-info-br ); }
+		&.-warning	{ @include draw( $action-warning-txt, 	$action-warning-bg, 	$action-warning-br ); }
+		&.-danger	{ @include draw( $action-danger-txt, 	$action-danger-bg, 		$action-danger-br ); }
 
-	} //-- end of .ls-list
+		&.-light	{ @include btn-base( $light-color-txt, 	$light-color-bg, 		$light-color-br ); }
+		&.-dark		{ @include btn-base( $dark-color-txt,	$dark-color-bg,	 		$dark-color-br ); }
+
+	} //-- end of .ls-item
+
+	&.-primary .ls-item		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-br ); }
+	&.-secondary .ls-item	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-br ); }
+	&.-tertiary .ls-item	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-br ); }
+	&.-quaternary .ls-item	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-br ); }
+
+	&.-success .ls-item	{ @include draw( $action-success-txt, 	$action-success-bg, 	$action-success-br ); }
+	&.-info .ls-item	{ @include draw( $action-info-txt, 		$action-info-bg, 		$action-info-br ); }
+	&.-warning .ls-item	{ @include draw( $action-warning-txt, 	$action-warning-bg, 	$action-warning-br ); }
+	&.-danger .ls-item	{ @include draw( $action-danger-txt, 	$action-danger-bg, 		$action-danger-br ); }
+
+	&.-light .ls-item	{ @include btn-base( $light-color-txt, 	$light-color-bg, 		$light-color-br ); }
+	&.-dark .ls-item	{ @include btn-base( $dark-color-txt,	$dark-color-bg,	 		$dark-color-br ); }
+	&.-glass .ls-item 	{ background-color: transparent; }
+
+	list-placeholder {
+		display: 				table;
+		width: 					100%;
+		height: 				auto;
+		margin-bottom: 			$base-padding / 2;
+
+		.lph-bg 	{ fill: $content-color-bg; }
+		.lph-hd 	{ fill: #cacaca; }
+		.lph-txt 	{ fill: #e0e0e0; }
+		.lph-thumb 	{ fill: #ececec; }
+		.lph-br 	{ fill: $content-color-br; }
+	}
 
 }
 

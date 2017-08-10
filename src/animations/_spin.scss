@@ -20,6 +20,11 @@ $anim-spin-timing: 				linear;																	// animation timing function
 
 .-spin { @extend %anim-spin; }
 
+.-spin-once {
+	@include  				rotate( 360deg );
+    @include 				transition( transform $anim-spin-duration ease );
+}
+
 // ======================================================================================================= ANIMATIONS
 
 @-moz-keyframes spin {

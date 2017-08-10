@@ -3,130 +3,170 @@
 $frm-input-height:			$default-height;
 $frm-input-height-s:		$default-height / 1.5;
 $frm-group-border-size:		2px;
-$frm-input-padding: 		($frm-input-height - $desktop-font-size) / 2;
+$frm-input-padding: 		(($frm-input-height - $desktop-font-size) / 2) - $frm-group-border-size;
 $frm-input-padding-s: 		($frm-input-height-s - ($desktop-font-size / 1.5)) / 2;
+
+$frm-label-font-size: 		$mobile-font-size * 0.7778;
 
 // ======================================================================================================= TEMPLATES & MIXINS
 
-%block100 {
+%frm {
 	display: 				block;
 	width: 					100%;
-}
 
-%frm {
 	@extend 				%clearfix;
-	@extend 				%block100;
+	@include 				draw( $content-color-txt, $content-color-bg, $content-color-br );
+
+	&.-glass {
+		background-color: transparent !important;
+
+		.row { background-color: transparent !important; }
+
+		.-underline { border-color: inherit; }
+
+		.-light, &.-light {
+			color: 					$light-color-bg;
+			background-color: 		transparent;
+			border-color: 			$light-color-br;
+		}
+
+		.-dark,  &.-dark  {
+			color: 					$dark-color-bg;
+			background-color: 		transparent;
+			border-color: 			$dark-color-br;
+		}
+
+		input { background-color: transparent !important; }
+	}
 
 	&.-mobile {
 		max-width: 				414px;
 		margin: 				0 auto;
 	}
 
-	&.-glass {
-		color: 					inherit;
-		background-color: 		transparent;
-	}
+	.row + .row { margin-top: 0 !important; }
 
-	label, .frm-label {
-		@extend 				%block100;
-		min-height:				$frm-input-height;
-		padding: 				$frm-input-padding ($base-padding / 2);
-
-		line-height: 			120%;
-		text-align: 			left;
-
-		&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg ) }
-		&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg ) }
-		&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg ) }
-		&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg ) }
-
-		&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg ) }
-		&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg ) }
-		&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg ) }
-		&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg ) }
-	}
-
-	.frm-group {
-		@extend 				%block100;
+	.row {
+		position: 				relative;
 		margin-bottom: 			$base-margin / 2;
+
+		// color: 					$content-color-txt;
+		// border-color: 			$content-color-br;
+		//
+		// background-color: 		$content-color-bg;
 
 		&:last-child { margin-bottom: 0; }
 
-		.ipt-group, .ipt-group-label {
-			position: 				relative;
-			display: 				table;
-			width: 					100%;
+		.cell, [class^="cell-"], [class*=" cell-"] {
+			padding: 				0;
+			text-align: 			left;
+			line-height: 			120%;
 
-			color: 					$base-color-txt;
-			border-bottom: 			$frm-group-border-size solid;
-			box-sizing: 			border-box;
+			&.-txt {
+				padding: 				$frm-input-padding ($base-padding / 2);
+				font-size: 				$desktop-font-size;
+			}
 
-			.ipt-group-cell {
-				display: 				table-cell;
+			&.-txt-inline {
+				display: 				block;
+				height: 				$frm-input-height;
 				padding: 				0 $base-padding / 2;
+				overflow: 				hidden;
 
-				text-align: 			left;
-				vertical-align: 		middle;
-				line-height: 			120%;
+				line-height: 			$frm-input-height;
+				text-overflow: 			ellipsis;
+				white-space: 			nowrap;
+			}
+
+			&.-icon {
+				& + .cell,
+				& + [class^="cell-"],
+				& + [class*=" cell-"] { padding-left: 0; }
+			}
+
+			&.-label {
+				padding: 				($base-padding / 6) 0;
+				font-size: 				$desktop-font-size * 0.875;
+
+				&.-primary		{ color: $brand-primary-bg; 	background-color: inherit; }
+				&.-secondary 	{ color: $brand-secondary-bg; 	background-color: inherit; }
+				&.-tertiary 	{ color: $brand-tertiary-bg; 	background-color: inherit; }
+				&.-quaternary 	{ color: $brand-quaternary-bg; 	background-color: inherit; }
+
+				&.-success 		{ color: $action-success-bg; 	background-color: inherit; }
+				&.-info 		{ color: $action-info-bg; 		background-color: inherit; }
+				&.-warning 		{ color: $action-warning-bg; 	background-color: inherit; }
+				&.-danger 		{ color: $action-danger-bg; 	background-color: inherit; }
+
+				&.-light 		{ color: $light-color-bg;		background-color: inherit; }
+				&.-dark 		{ color: $dark-color-bg; 		background-color: inherit; }
+			}
+
+			.btn, button { @include flex( 1 0 auto ); }
+		}
+
+		&.-inline {
+			.cell, [class^="cell-"], [class*=" cell-"] {
+				&.-label {
+					padding: 				(( $default-height - $frm-label-font-size ) / 2 - $frm-group-border-size) 0;
+					font-size: 				$frm-label-font-size;
+				}
+			}
+		}
+
+		&.-small {
+			.cell, [class^="cell-"], [class*=" cell-"] {
+				font-size: 				0.66667em;
+				padding: 				$frm-input-padding-s ( $base-padding / 3 );
 
 				&.-icon {
-					width: 					$frm-input-height;
-					height:					$frm-input-height;
-					line-height: 			$frm-input-height;
+					width:					$frm-input-height-s;
+					height:					$frm-input-height-s;
+					line-height: 			$frm-input-height-s;
 					padding: 				0;
-
-					text-align: 			center;
-					vertical-align: 		middle;
-					font-size: 				110%;
-
-					& + .ipt-group-cell { padding-left: 0; }
-				}
-
-				.btn, button { display: table-cell; }
-			}
-
-			&.-small {
-				.ipt-group-cell {
-					font-size: 				0.66667em;
-					padding: 				$frm-input-padding-s ($base-padding / 3);
-
-					&.-icon {
-						width:					$frm-input-height-s;
-						height:					$frm-input-height-s;
-						line-height: 			$frm-input-height-s;
-						padding: 				0;
-					}
 				}
 			}
+		}
 
-			&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-txt ) }
-			&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-txt ) }
-			&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-txt ) }
-			&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-txt ) }
+		&.-underline {
+			border-bottom-width: 	$frm-group-border-size;
+			border-bottom-style: 	solid;
+			border-color: 			inherit;
 
-			&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg ) }
-			&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg ) }
-			&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg ) }
-			&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg ) }
+			&.-dotted { border-bottom-style: dotted; }
+			&.-dashed { border-bottom-style: dashed; }
+		}
 
-		} //-- end of .ipt-group
+	} //-- end of .row
 
-		.ipt-group-label { border: none; }
+	&.-primary .row		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-br ); }
+	&.-secondary .row	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-br ); }
+	&.-tertiary .row	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-br ); }
+	&.-quaternary .row	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-br ); }
 
-		&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg ) }
-		&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg ) }
-		&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg ) }
-		&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg ) }
+	&.-success .row	{ @include draw( $action-success-txt, 	$action-success-bg, 	$action-success-br ); }
+	&.-info .row	{ @include draw( $action-info-txt, 		$action-info-bg, 		$action-info-br ); }
+	&.-warning .row	{ @include draw( $action-warning-txt, 	$action-warning-bg, 	$action-warning-br ); }
+	&.-danger .row	{ @include draw( $action-danger-txt, 	$action-danger-bg, 		$action-danger-br ); }
 
-		&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg ) }
-		&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg ) }
-		&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg ) }
-		&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg ) }
-
-	} //-- end of .frm-group
+	&.-light .row	{ @include btn-base( $light-color-txt, 	$light-color-bg, 		$light-color-br ); }
+	&.-dark .row	{ @include btn-base( $dark-color-txt,	$dark-color-bg,	 		$dark-color-br ); }
 
 } //-- end of .frm
 
 // ======================================================================================================= CLASSES
 
 .frm { @extend %frm; }
+
+// ======================================================================================================= ANDROID FIX
+
+.dev-android {
+	&.dev-android-4,
+	&.dev-android-5-0 {
+
+		.-txt-inline {
+			font-size: 				$mobile-font-size * 1.11112 !important;
+			line-height: 			$frm-input-height * 1.3 !important;
+		}
+	}
+}

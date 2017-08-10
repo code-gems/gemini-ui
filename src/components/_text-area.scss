@@ -17,7 +17,8 @@ $text-area-height:			$default-height;
 	resize: 				none;
 
 	border: 				none;
-	background-color: 		darken( $base-color-bg, 2% );
+	@include 				round( 3px );
+	background-color: 		$base-color-bg;
 
 	&.-glass { background-color: transparent; }
 

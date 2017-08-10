@@ -19,40 +19,50 @@ $brand-quaternary-br: 			darken( $brand-quaternary-bg, 10% );
 // ======================================================================================================= BASE COLORS
 
 $base-color-txt: 				#454545;																// [BASE] text color
-$base-color-bg: 				#ffffff;																// [BASE] background color
+$base-color-bg: 				#f1f1f1;																// [BASE] background color
 $base-color-br: 				lighten( $base-color-bg, 10% );											// [BASE] border color
 
-$base-color-link: 				$brand-primary-txt;														// [BASE] link text color
-$base-color-link-hover:			lighten( $brand-primary-txt, 10% );										// [BASE] hovered link text color
+$base-color-link: 				$brand-secondary-bg;														// [BASE] link text color
+$base-color-link-hover:			lighten( $base-color-link, 10% );										// [BASE] hovered link text color
 $base-color-link-disabled:		#cccccc;																// [BASE] disabled link color
+
+// LIGHT & DARK
+$light-color-txt:				#454545;
+$light-color-bg:				#ffffff;
+$light-color-br:				darken( $light-color-bg, 10% );
+
+$dark-color-txt:				#f1f1f1;
+$dark-color-bg:					#454545;
+$dark-color-br:					lighten( $dark-color-bg, 10% );
 
 // ======================================================================================================= ACTION COLORS
 
 $action-success-txt:			#ffffff;																// [SUCCESS] action text color
-$action-success-bg:				#4ecac5;																// [SUCCESS] action background color
+$action-success-bg:				#4ecaa1;																// [SUCCESS] action background color
 $action-success-br:				darken( $action-success-bg, 10% );										// [SUCCESS] action border color
 
 $action-info-txt:				#ffffff;
-$action-info-bg:				#4791ff;
+$action-info-bg:				#33bee5;
 $action-info-br:				darken( $action-info-bg, 10% );
 
-$action-warning-txt:			#454545;
-$action-warning-bg:				#ffc46b;
-$action-warning-br:				lighten( $action-warning-bg, 10% );
+$action-warning-txt:			#ffffff;
+$action-warning-bg:				#fc8738;
+$action-warning-br:				darken( $action-warning-bg, 10% );
 
 $action-danger-txt:				#ffffff;
-$action-danger-bg:				#f44b4b;
-$action-danger-br:				lighten( $action-danger-bg, 10% );
+$action-danger-bg:				#e03a3a;
+$action-danger-br:				darken( $action-danger-bg, 10% );
 
 // ======================================================================================================= COMPONENTS COLORS
 
 // BUTTONS
-$btn-disable-txt:				#cacaca;
-$btn-disable-bg:				#a5a5a5;
+$btn-disable-txt:				#f1f1f1;
+$btn-disable-bg:				#cccccc;
 $btn-disable-br:				darken( $btn-disable-bg, 10% );
 
 // CONTENT
 $content-color-txt:				#454545;
 $content-color-bg:				#ffffff;
+$content-color-br:				darken( $content-color-bg, 15% );
 
 // ...

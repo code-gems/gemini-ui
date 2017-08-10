@@ -1,0 +1,32 @@
+// ======================================================================================================= VARS
+
+// ...
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%welcome-pane {
+	position: 				relative;
+	display: 				block;
+	padding: 				0;
+	text-align: 			center;
+
+	.wp-icon {
+		height: 120px;
+		height: 30vh;
+	}
+
+	.wp-header {
+		margin: 				0;
+		color: 					$brand-primary-txt;
+		font-family: 			'Miller Banner';
+		font-size: 				36px;
+		font-weight: 			normal;
+		line-height: 			1.1em;
+		
+		span { color: lighten( $brand-primary-bg, 20% ); }
+	}
+}
+
+// ======================================================================================================= CLASSES
+
+.welcome-pane { @extend %welcome-pane; }

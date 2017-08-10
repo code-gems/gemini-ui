@@ -1,8 +1,3 @@
-// ======================================================================================================= VARS
-
-// ...
-
-// ======================================================================================================= TEMPLATES & MIXINS
 
 %notify-me {
 	position: 				fixed;
@@ -12,10 +7,9 @@
 	top: 					0;
 	right: 					0;
 
-	padding: 				15px 15px 15px 25px;
-	color: 					$brand-secondary-txt;
+	padding: 				0;
+	@include 				draw( $action-info-txt, $action-info-bg, $action-info-br );
 
-	background-color: 		$brand-secondary-bg;
 	z-index: 				1000;
 
 	-webkit-transform-origin: 50% 0%;
@@ -26,8 +20,6 @@
 			animation-duration: 1s;
 	-webkit-animation-fill-mode: both;
 			animation-fill-mode: both;
-
-
 
 	&.-show {
 		display: 				block !important;
@@ -46,50 +38,19 @@
 				animation-direction: reverse;
 	}
 
-	&.-success {
-		color: 					$action-success-txt;
-		background-color: 		$action-success-bg;
-	}
-
-	&.-info {
-		color: 					$action-info-txt;
-		background-color: 		$action-info-bg;
-	}
-
-	&.-warning {
-		color: 					$action-warning-txt;
-		background-color: 		$action-warning-bg;
-	}
-
-	&.-error {
-		color: 					$action-danger-txt;
-		background-color: 		$action-danger-bg;
+	.nm-title, .nm-body { width: 100%; }
+	.nm-body {
+		opacity: 			.8;
+		font-size: 			.8em !important;
 	}
 
 }
 
-// ======================================================================================================= CLASSES
+// =============================================================================== CLASSES
 
 .notify-me { @extend %notify-me; }
-.nm-title {
-	font-weight: bold;
-}
-.nm-cont {
-	margin-right:15px;
-}
-.nm-wrap {
-	display: flex;
-	align-items: top;
-}
-.nm-icon {
-	font-size:30px;
-	margin-right:10px;
-}
-.nm-btn-close {
-	margin-left:auto;
-	font-size:20px;
-}
-// ======================================================================================================= ANIMATIONS
+
+// =============================================================================== ANIMATIONS
 
 
 @-webkit-keyframes flipInX {

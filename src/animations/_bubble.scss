@@ -6,9 +6,10 @@ $anim-fade-timing:				linear;																	// animation timing function
 
 // ======================================================================================================= CLASSES
 
-.-fade-in, .-fade-out {
+.-bubble {
 	animation-duration: 	$anim-fade-duration;
 	animation-delay: 		$anim-fade-delay;
+	animation-name: 		bubble;
 	animation-fill-mode: 	forwards;
 	animation-timing-function: $anim-fade-timing;
 
@@ -21,28 +22,16 @@ $anim-fade-timing:				linear;																	// animation timing function
 	&.-delay-3 { opacity: 0; animation-delay: 3s }
 }
 
-.-fade-in { animation-name: fade-in; }
-
-.-fade-out { animation-name: fade-out; }
-
 // ======================================================================================================= ANIMATIONS
 
-@keyframes fade-in {
-	from { opacity: 0; }
-	to   { opacity: 1; }
+@keyframes bubble {
+    0%   { transform: scale(0.5); opacity:0.0; }
+    50%  { transform: scale(1.2); opacity:0.5; }
+    100% { transform: scale(1.0); opacity:1.0; }
 }
 
-@-webkit-keyframes fade-in {
-	from { opacity: 0; }
-	to   { opacity: 1; }
-}
-
-@keyframes fade-out {
-	from { opacity: 1; }
-	to   { opacity: 0; }
-}
-
-@-webkit-keyframes fade-out {
-	from { opacity: 1; }
-	to   { opacity: 0; }
+@-webkit-keyframes bubble {
+    0%   { transform: scale(0.5); opacity:0.0; }
+    50%  { transform: scale(1.2); opacity:0.5; }
+    100% { transform: scale(1.0); opacity:1.0; }
 }

@@ -4,7 +4,8 @@
 @import "base/colors";
 
 @import "animations/**/*";
-@import "theme/**/*";
 
 @import "layout/**/*";
-@import "components/**/*";
+@import "components/*.scss";
+
+@import "theme/**/*";

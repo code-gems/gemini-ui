@@ -16,27 +16,49 @@ $input-height:			$default-height;
 	outline: 				none;
 
 	border: 				none;
+	@include 				round( 3px );
 	background-color: 		$base-color-bg;
 
 	&.-glass { background-color: transparent; }
 
-	&.-white-ph {
-		&::-webkit-input-placeholder 	{ color: darken( #fff, 20% ) }
-		&::-moz-placeholder 			{ color: darken( #fff, 20% ) }
-		&:-ms-input-placeholder 		{ color: darken( #fff, 20% ) }
-		&:-moz-placeholder 				{ color: darken( #fff, 20% ) }
+	&.-light-ph {
+		color: 					$light-color-bg;
+		&::-webkit-input-placeholder 	{ color: rgba( $light-color-bg, .8 ); }
+		&::-moz-placeholder 			{ color: rgba( $light-color-bg, .8 ); }
+		&:-ms-input-placeholder 		{ color: rgba( $light-color-bg, .8 ); }
+		&:-moz-placeholder 				{ color: rgba( $light-color-bg, .8 ); }
 	}
 
-	&.-black-ph {
-		&::-webkit-input-placeholder 	{ color: lighten( #000, 20% ) }
-		&::-moz-placeholder 			{ color: lighten( #000, 20% ) }
-		&:-ms-input-placeholder 		{ color: lighten( #000, 20% ) }
-		&:-moz-placeholder 				{ color: lighten( #000, 20% ) }
+	&.-dark-ph {
+		color: 					$dark-color-bg;
+		&::-webkit-input-placeholder 	{ color: rgba( $dark-color-bg, .8 ); }
+		&::-moz-placeholder 			{ color: rgba( $dark-color-bg, .8 ); }
+		&:-ms-input-placeholder 		{ color: rgba( $dark-color-bg, .8 ); }
+		&:-moz-placeholder 				{ color: rgba( $dark-color-bg, .8 ); }
 	}
+
+	&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-br ); }
+	&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-br ); }
+	&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-br ); }
+	&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-br ); }
+
+	&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg, $action-success-br ); }
+	&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg, 	$action-info-br ); }
+	&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg, $action-warning-br ); }
+	&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg, 	$action-danger-br ); }
+
+	&.-light 	{ @include draw( $dark-color-txt, $dark-color-bg, $dark-color-br ); }
+	&.-dark 	{ @include draw( $dark-color-txt, $dark-color-bg, $dark-color-br ); }
+
+	&.-txt-center 	{ option { text-align: center !important; } }
+	&.-txt-left 	{ option { text-align: left !important; } }
+	&.-txt-right 	{ option { text-align: right !important; } }
+	&.-txt-justify 	{ option { text-align: justify !important; } }
 }
 
 // ======================================================================================================= CLASSES
 
+select,
 input[type=color],
 input[type=date],
 input[type=datetime-local],

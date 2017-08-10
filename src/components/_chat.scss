@@ -1,31 +1,55 @@
 // ======================================================================================================= VARS
 
-$chat-bubble-alt-color-txt:	$base-color-txt;
-$chat-bubble-alt-color-bg:	#cceceb;
+$chat-odd-color-txt:		$content-color-bg;
+$chat-odd-color-bg:			rgba( $content-color-txt, .75 );
 
 $chat-default-height: 		$default-height; 															// chat - default height
 $chat-default-height-s:		$default-height / 1.5;														// chat - default height [SMALL]
 
+$chat-border-size: 			1px;
+$chat-cell-padding: 		($chat-default-height - $desktop-font-size) / 2 - ($chat-border-size * 2);
+
 // ======================================================================================================= TEMPLATES & MIXINS
 
-%chat-list {
-	display: 				block;
+%chat {
+	position:				relative;
+	display:				block;
 	width: 					100%;
-	padding: 				0 $base-padding / 2;
+	margin: 				0;
+	padding: 				0;
 
 	.chat-bubble {
 		position:				relative;
-		display: 				block;
-		width: 					100%;
-		margin-bottom: 			$base-margin / 2;
+		width: 					auto;
+		margin-bottom: 			$base-margin / 2 !important;
+		margin-right: 			$chat-default-height / 2;
 
-		color: 					$base-color-txt;
+		@include 				round( $chat-default-height / 2 !important );
 
-		@include 				round( $chat-default-height / 2 );
+		color: 					$content-color-txt;
+		background-color: 		rgba( $content-color-bg, .75 );
+		border-right-color: 	rgba( $content-color-bg, .75 ) !important;
+		border-left-color: 		rgba( $content-color-bg, .75 ) !important;
 
-		background-color: 		darken( $base-color-bg, 5% );
-		border-left-color: 		darken( $base-color-bg, 5% );
-		border-right-color: 	darken( $base-color-bg, 5% );
+		.cell, [class^="cell-"], [class*=" cell-"] {
+			padding: 				$chat-cell-padding ($base-padding / 2);
+
+			text-align: 			left;
+			line-height: 			120%;
+
+			&.-icon {
+				width: 					$default-height;
+				height: 				$default-height;
+				line-height:			$default-height;
+				text-align: 			center;
+				font-size: 				120%;
+				padding: 				0;
+
+				& + .cell,
+				& + [class^="cell-"],
+				& + [class*=" cell-"] { padding-left: 0; }
+			}
+		}
 
 		&:last-child { margin-bottom: 0; }
 
@@ -47,47 +71,13 @@ $chat-default-height-s:		$default-height / 1.5;														// chat - default h
 			border-width: 			$chat-default-height / 4;
 		}
 
-		.chat-row {
-			display: 				table;
-			width: 					100%;
-
-			.chat-cell {
-				display: 				table-cell;
-				text-align: 			left;
-    			vertical-align: 		middle;
-				padding: 				0 $base-padding / 2;
-
-				&.-icon {
-					width:					$chat-default-height;
-					height:					$chat-default-height;
-					padding: 				0;
-
-					text-align: 			center;
-					vertical-align: 		middle;
-					line-height: 			$chat-default-height;
-					font-size: 				110%;
-
-					& + .chat-cell { padding-left: 0; }
-				}
-			} //-- end of .chat-cell
-
-			&.-small {
-				font-size: 				0.66667em;
-
-				.-icon {
-					width:					$chat-default-height-s;
-					height:					$chat-default-height-s;
-					line-height: 			$chat-default-height-s;
-				}
-			}
-
-		} //-- end of .chat-row
-
-		&.-alt {
-			color: 					$chat-bubble-alt-color-txt;
-			background-color: 		$chat-bubble-alt-color-bg;
-			border-left-color: 		$chat-bubble-alt-color-bg;
-			border-right-color: 	$chat-bubble-alt-color-bg;
+		&.-odd {
+			margin-left: 			$chat-default-height / 2;
+			margin-right: 			0;
+			color: 					$chat-odd-color-txt;
+			background-color: 		$chat-odd-color-bg;
+			border-right-color: 	$chat-odd-color-bg !important;
+			border-left-color: 		$chat-odd-color-bg !important;
 
 			&:before {
 				left: 					100%;
@@ -97,22 +87,11 @@ $chat-default-height-s:		$default-height / 1.5;														// chat - default h
 			}
 		} //-- end of .-alter
 
-		&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg ) }
-		&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg ) }
-		&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg ) }
-		&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg ) }
-
-		&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg ) }
-		&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg ) }
-		&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg ) }
-		&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg ) }
-
-	} //-- end of .chat-bubble
-
+	}
 }
 
 //================================================================================ CLASSES
 
-.chat-list { @extend %chat-list; }
+.chat { @extend %chat; }
 
 //================================================================================ RESPONSIVE

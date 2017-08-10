@@ -1,60 +1,173 @@
 // ======================================================================================================= VARS
-// vars can be moved to base/_vars.scss file in case of supporting multiple themes
 
-$grid-columns: 						12;																	// number of columns in a grid
+$grid-columns: 						12;																	// number of columns in a grid obviously... ;P
 
 // ======================================================================================================= TEMPLATES & MIXINS
 
-%clearfix {
-	&:before, &:after { display: table; content: " "; }
-	&:after { clear: both; }
-}
-
 %row {
 	@include 				display-flex();
+	@include 				flex-flow( row wrap );
 	@include 				border-box();
 	width:					100%;
+	padding: 				0;
+
+	.row-br {
+		display: 				block;
+		width: 					100%;
+		@include 				flex( 1 1 100% );
+	}
+
+	&.-no-wrap { @include flex-flow( row nowrap ); }
+	&.-mobile {
+		max-width: 			414px;
+    	margin: 			0 auto;
+	}
+
+	&.-left { @include justify-content( flex-start ); }
+	&.-center { @include justify-content( center ); }
+	&.-right { @include justify-content( flex-end ); }
+
+	&.-top { @include align-items( flex-start ); }
+	&.-middle { @include align-items( center ); }
+	&.-bottom { @include align-items( flex-end ); }
+
+	&.-space-around { @include justify-content( space-around ); }
+	&.-space-between { @include justify-content( space-between ); }
 }
 
-%cell {
-	@include 				flex( 0 0 auto );
+%cell-base {
+	@include 				display-flex();
+	@include 				flex-flow( row wrap );
 	@include 				border-box();
+	max-width: 				100%;
+
+	@for $i from 1 through $grid-columns {
+		$proc: ( 100% / $grid-columns ) * $i;
+		&.-offset-#{$i} { margin-left: $proc; }
+	}
+
+	&.-round 		{ @include round( 50% ); }
+	&.-round-left 	{ @include round( 50% 0 0 50% ); }
+	&.-round-right 	{ @include round( 0 50% 50% 0 ); }
+
+	&.-icon {
+		padding: 				0;
+		width: 					$default-height;
+		min-height:				$default-height;
+		line-height: 			$default-height;
+		font-size: 				150%;
+
+		@include 				flex-basis( auto );
+		@include 				justify-content( center );
+		@include 				align-items( center );
+
+		& + .cell,
+		& + [class^="cell-"],
+		& + [class*=" cell-"] { padding-left: 0; }
+	}
+
+	&.-left { @include justify-content( flex-start ); }
+	&.-center { @include justify-content( center ); }
+	&.-right { @include justify-content( flex-end ); }
+
+	&.-top { @include align-items( flex-start ); }
+	&.-middle { @include align-items( center ); }
+	&.-bottom { @include align-items( flex-end ); }
+
+	&.-space-around { @include justify-content( space-around ); }
+	&.-space-between { @include justify-content( space-between ); }
+	&.-ellipsis {
+		display: 				block;
+		height: 				$default-height;
+		line-height: 			$default-height;
+		overflow: 				hidden;
+		text-overflow: 			ellipsis;
+		white-space: 			nowrap;
+	}
 }
 
 @mixin cell-width( $size ) {
 	$proc:					( 100% / $grid-columns ) * $size;
-	@include 				flex( 0 0 $proc );
+	@include 				flex-basis( $proc );
+	width:   				$proc;
+	max-width:   			$proc;
+}
+
+@mixin cell-offset( $size ) {
+	$proc:					( 100% / $grid-columns ) * $size;
 	width:   				$proc;
 }
 
 // ======================================================================================================= CLASSES
 
-.row {
-	@extend %row;
-	@extend %clearfix;
+.row { @extend %row; }
+
+.cell { @extend %cell-base; }
+
+.row-br { @include flex( 1 1 100% ); }
+
+@for $i from 1 through 10 {
+	.-w#{$i * 10} { width: ($i * 10) * 1%; }
+
+	.-h#{$i * 10} { height: ($i * 10) * 1%; height: ($i * 10) + vh }
 }
 
 @for $i from 1 through $grid-columns {
-	.-xs#{$i}, .-s#{$i}, .-m#{$i}, .-l#{$i}, .-xl#{$i} {
-		@extend %cell;
+
+	// responsive cell base - .cell-1-m, .cell-2-m etc.
+	.cell-#{$i}-xs, .cell-#{$i}-s, .cell-#{$i}-m, .cell-#{$i}-l, .cell-#{$i}-xl {
+		@extend 	%cell-base;
+	}
+
+	// universal cell classes - .cell-1, .cell-2 etc.
+	.cell-#{$i} {
+		@extend 	%cell-base;
+		@include 	cell-width( $i );
 	}
 
 }
 
 // ======================================================================================================= RESPONSIVE
 
-@media all and ( max-width: $screen-size-l ) {
-
+@media all and ( max-width: $screen-size-xl ) {
 	@for $i from 1 through $grid-columns {
-		.-l#{$i} { @include cell-width( $i ); }
+		.cell-#{$i}-xl { @include cell-width( $i ); }
 	}
+}
 
+@media all and ( max-width: $screen-size-l ) {
+	@for $i from 1 through $grid-columns {
+		.cell-#{$i}-l { @include cell-width( $i ); }
+	}
 }
 
 @media all and ( max-width: $screen-size-m ) {
-
 	@for $i from 1 through $grid-columns {
-		.-m#{$i} { @include cell-width( $i ); }
+		.cell-#{$i}-m { @include cell-width( $i ); }
 	}
+}
 
+@media all and ( max-width: $screen-size-s ) {
+	@for $i from 1 through $grid-columns {
+		.cell-#{$i}-s { @include cell-width( $i ); }
+	}
+}
+
+@media all and ( max-width: $screen-size-xs ) {
+	@for $i from 1 through $grid-columns {
+		.cell-#{$i}-xs { @include cell-width( $i ); }
+	}
+}
+
+// ======================================================================================================= ANDROID FIX
+
+.dev-android {
+	&.dev-android-4,
+	&.dev-android-5-0 {
+
+		.cell, [class^="cell-"], [class*=" cell-"] {
+			line-height: 			180% !important;
+		}
+
+	}
 }

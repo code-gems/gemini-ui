@@ -1,0 +1,63 @@
+// ======================================================================================================= VARS
+
+$tile-size: 				120px;																		// tile height
+$tile-font-size:			56px;																		// tile font size
+$tile-border-size: 			2px;
+
+// ======================================================================================================= TEMPLATES & MIXINS
+
+%menu-tile {
+	display: 				block;
+
+	color: 					$light-color-bg;
+	text-align: 			center;
+	text-decoration: 		none;
+	padding: 				($base-padding / 2) 0 0 0;
+
+	.mt-icon {
+		display: 				block;
+		width: 					$tile-size;
+		height: 				$tile-size;
+		margin: 				0 auto;
+
+		line-height: 			$tile-size;
+		text-align: 			center;
+		font-size: 				$tile-font-size;
+		font-weight: 			normal;
+		text-shadow: 			0 0 10px rgba( $light-color-bg, 0.5 );
+
+		border: 				$tile-border-size solid rgba( $light-color-bg, 0.5 );
+
+		@include 				round( $tile-size / 2 );
+
+		@include 				shadow( 0 0 30px rgba(240, 240, 255, .2), 0 0 30px rgba(240, 240, 255, .2) inset );
+	}
+
+	.mt-title {
+		margin: 				0;
+		font-size: 				18px;
+	}
+}
+
+// ======================================================================================================= CLASSES
+
+.menu-tile { @extend %menu-tile; }
+
+// ======================================================================================================= RESPONSIVE
+
+// ...
+
+//================================================================================ ANDROID FIX
+
+.dev-android {
+	&.dev-android-4,
+	&.dev-android-5-0 {
+
+		.menu-tile .mt-icon {
+			font-size: 				$tile-font-size * 1.11112 !important;
+			line-height: 			$tile-size * 1.3 !important;
+
+			-webkit-font-smoothing: antialiased;
+		}
+	}
+}

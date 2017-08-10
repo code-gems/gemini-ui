@@ -1,10 +1,12 @@
 // ======================================================================================================= VARS
 
-$btn-height: 					48px;																	// [MEDIUM] button default - height
-$btn-padding: 					$base-padding;															// [MEDIUM] button default - padding
-$btn-font-size: 				$desktop-font-size;														// [MEDIUM] button default - font size
-$btn-border-size: 				2px;																	// [MEDIUM] button default - border size
-$btn-border-radius: 			$btn-height / 2;														// [MEDIUM] button default - border radius
+$btn-height: 					$default-height;														// button default - height
+$btn-height-small:				$default-height * .75;													// button default - height small
+$btn-padding: 					$base-padding;															// button default - padding
+$btn-font-size: 				$desktop-font-size;														// button default - font size
+$btn-border-size: 				2px;																	// button default - border size
+$btn-border-radius: 			$btn-height / 2;														// button default - border radius
+$btn-badge-size: 				28px;
 
 // ======================================================================================================= TEMPLATES & MIXINS
 
@@ -13,11 +15,10 @@ $btn-border-radius: 			$btn-height / 2;														// [MEDIUM] button default 
 	background-color: 		$bg;
 	border-color: 			$br;
 
-	// &:hover { background-color: lighten( $bg, 5% ) }
 	&.-outline {
 		color:					$bg;
 		line-height: 			$btn-height - ($btn-border-size * 2);
-		border: 				2px solid $br;
+		border: 				$btn-border-size solid $br;
 		background-color:		transparent;
 	}
 
@@ -30,7 +31,7 @@ $btn-border-radius: 			$btn-height / 2;														// [MEDIUM] button default 
 @mixin outline( $txt, $br ) {
 	color:					$txt;
 	line-height: 			$btn-height - ($btn-border-size * 2);
-	border: 				2px solid $br;
+	border: 				$btn-border-size solid $br;
 	background-color:		transparent;
 }
 
@@ -55,30 +56,45 @@ $btn-border-radius: 			$btn-height / 2;														// [MEDIUM] button default 
 
 	vertical-align: 		middle;
 
-	@include 				btn-base( $base-color-txt, $base-color-bg, $base-color-br );
+	@include 				btn-base( $content-color-txt, $content-color-bg, $content-color-br );
 
 	border: 				none;
 	@include 				round( 3px );
 	@include 				border-box();
 
 
-	&.-full { width: 100%; }
 	&.-round { @include round( $btn-border-radius ); }
-	&.-outline { @include outline( $base-color-txt, $base-color-txt ) }
-	&:disabled, &[disabled^="disabled"] { @include btn-base( $btn-disable-txt, $btn-disable-bg ) }
+	&.-outline { @include outline( $base-color-txt, $base-color-txt ); }
 
-	&.-primary 		{ @include btn-base( $brand-primary-txt, 	$brand-primary-bg ) }
-	&.-secondary 	{ @include btn-base( $brand-secondary-txt, 	$brand-secondary-bg ) }
-	&.-tertiary 	{ @include btn-base( $brand-tertiary-txt, 	$brand-tertiary-bg ) }
-	&.-quaternary 	{ @include btn-base( $brand-quaternary-txt, $brand-quaternary-bg ) }
+	&.-primary 		{ @include btn-base( $brand-primary-txt, 	$brand-primary-bg ); }
+	&.-secondary 	{ @include btn-base( $brand-secondary-txt, 	$brand-secondary-bg ); }
+	&.-tertiary 	{ @include btn-base( $brand-tertiary-txt, 	$brand-tertiary-bg ); }
+	&.-quaternary 	{ @include btn-base( $brand-quaternary-txt, $brand-quaternary-bg ); }
 
-	&.-white 	{ @include btn-base( $base-color-bg, 		$base-color-txt, 	$base-color-bg ) }
+	&.-success 	{ @include btn-base( $action-success-txt, 	$action-success-bg ); }
+	&.-info 	{ @include btn-base( $action-info-txt, 		$action-info-bg ); }
+	&.-warning 	{ @include btn-base( $action-warning-txt, 	$action-warning-bg ); }
+	&.-danger 	{ @include btn-base( $action-danger-txt, 	$action-danger-bg ); }
 
-	&.-success 	{ @include btn-base( $action-success-txt, 	$action-success-bg ) }
-	&.-info 	{ @include btn-base( $action-info-txt, 		$action-info-bg ) }
-	&.-warning 	{ @include btn-base( $action-warning-txt, 	$action-warning-bg ) }
-	&.-danger 	{ @include btn-base( $action-danger-txt, 	$action-danger-bg ) }
-	&.-glass	{ @include btn-base( inherit, 				transparent) }
+	&.-light 	{ @include btn-base( $light-color-txt, 		$light-color-bg, 	$light-color-br ); }
+	&.-dark 	{ @include btn-base( $dark-color-txt,		$dark-color-bg,	 	$dark-color-br ); }
+
+	&.-glass	{
+		@include btn-base( inherit, transparent );
+
+		&.-light { @include btn-base( $light-color-bg, transparent ); }
+		&.-dark  { @include btn-base( $dark-color-bg, transparent ); }
+	}
+
+	&:disabled, &[disabled^="disabled"] { @include btn-base( $btn-disable-txt, $btn-disable-bg ); }
+
+	&.-small {
+		height: 				$btn-height-small;
+		padding: 				0 ($btn-padding / 3);
+
+	    line-height: 			$btn-height-small;
+	    font-size: 				12px;
+	}
 
 	&.-mobile { max-width: 414px; }
 	&.-icon {
@@ -88,12 +104,44 @@ $btn-border-radius: 			$btn-height / 2;														// [MEDIUM] button default 
 
 		text-align: 			center;
 		line-height: 			$btn-height;
-		font-size: 				120%;
+		font-size: 				150%;
 	}
+
+	&.-badge { overflow: visible; }
 
 	ion-spinner svg {
 		width: 					$btn-height;
 		height: 				$btn-height;
+	}
+
+	.btn-badge {
+		position: 				absolute;
+		display: 				block;
+		width: 					$btn-badge-size;
+		height: 				$btn-badge-size;
+		bottom: 				-($btn-badge-size / 2);
+		left: 					9px;
+
+		color: 					$brand-primary-txt;
+		font-size: 				12px;
+		line-height: 			$btn-badge-size;
+		font-family: 			Arial;
+		text-shadow: 			0 1px 1px rgba(0,0,0,.5);
+
+		@include 				round( $btn-badge-size / 2 );
+		@include 				shadow( 0 1px 2px rgba(0,0,0,.3) );
+		background-color: 		$brand-primary-bg;
+
+		&.-primary 		{ color: $brand-primary-txt; 		background-color: $brand-primary-bg; }
+		&.-secondary 	{ color: $brand-secondary-txt; 		background-color: $brand-secondary-bg; }
+		&.-tertiary 	{ color: $brand-tertiary-txt; 		background-color: $brand-tertiary-bg; }
+		&.-quaternary 	{ color: $brand-quaternary-txt; 	background-color: $brand-quaternary-bg; }
+
+		&.-success 	{ color: $action-success-txt; 	background-color: $action-success-bg; }
+		&.-info 	{ color: $action-info-txt; 		background-color: $action-info-bg; }
+		&.-warning 	{ color: $action-warning-txt; 	background-color: $action-warning-bg; }
+		&.-danger 	{ color: $action-danger-txt; 	background-color: $action-danger-bg; }
+
 	}
 
 }
@@ -105,37 +153,66 @@ $btn-border-radius: 			$btn-height / 2;														// [MEDIUM] button default 
 
 	button, .btn {
 		display: 				block;
-		@include 				flex( 1 0 auto );
 		min-width: 				1%;
 		margin-left:			5px;
 
-		&:first-child() { margin-left: 0; }
+		&:first-child { margin-left: 0; }
 
 		&.-icon {
-			width: 					48px;
-			@include 				flex( 0 0 48px );
+			width: 					$btn-height;
+			@include 				flex( 0 0 $btn-height );
 		}
 	}
+
+	&.-space-around { @include space-around(); }
+	&.-space-between { @include space-between(); }
 
 	&.-left {
 		@include 				justify-content( flex-start );
 		float: 					none;
 	}
+
 	&.-center {
-		@include 				display-flex();
-		margin: 				auto;
-		@include 				justify-content( cener );
+		@include 				justify-content( center );
 	}
+
 	&.-right {
 		@include 				justify-content( flex-end );
 		float: 					none;
 	}
 }
 
-//================================================================================ CLASSES
+// ======================================================================================================= CLASSES
 
 button, .btn { @extend %btn; }
 
 .btn-group{ @extend %btn-group; }
 
-//================================================================================ RESPONSIVE
+// ======================================================================================================= RESPONSIVE
+
+// ...
+
+// ======================================================================================================= ANDROID FIX
+
+.dev-android {
+	&.dev-android-4,
+	&.dev-android-5-0 {
+
+		.btn {
+			font-size: 				$btn-font-size * 1.11112 !important;
+			line-height: 			$btn-height * 1.3 !important;
+
+			-webkit-font-smoothing: antialiased;
+			-webkit-text-stroke: 	0.2px;
+
+			&.-icon {
+				font-size: 				150% !important;
+				line-height: 			$btn-height * 1.3 !important;
+			}
+
+			.btn-badge {
+				line-height: 			$btn-badge-size * 1.3 !important;
+			}
+		}
+	}
+}

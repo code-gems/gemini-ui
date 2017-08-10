@@ -39,11 +39,52 @@
 			flex: $value;
 }
 
+@mixin flex-wrap( $value ) {
+	-webkit-flex-wrap: $value;
+	   -moz-flex-wrap: $value;
+		-ms-flex-wrap: $value;
+			flex-wrap: $value;
+}
+
+@mixin flex-basis( $value ) {
+	-webkit-flex-basis: $value;
+	   -moz-flex-basis: $value;
+		-ms-flex-basis: $value;
+			flex-basis: $value;
+}
+
 @mixin justify-content( $value ) {
-	-webkit-justify-conten: $value;
-	   -moz-justify-conten: $value;
-		-ms-justify-conten: $value;
-			justify-conten: $value;
+	-webkit-justify-content: $value;
+	   -moz-justify-content: $value;
+		-ms-justify-content: $value;
+			justify-content: $value;
+}
+
+@mixin align-content( $value ) {
+	-webkit-align-content: $value;
+	   -moz-align-content: $value;
+		-ms-align-content: $value;
+			align-content: $value;
+}
+
+@mixin align-items( $value ) {
+	-webkit-align-items: $value;
+	   -moz-align-items: $value;
+		-ms-align-items: $value;
+			align-items: $value;
+}
+
+@mixin space-around() {
+	-webkit-justify-content: space-around;
+	   -moz-justify-content: space-around;
+		-ms-justify-content: space-around;
+			justify-content: space-around;
+}
+@mixin space-between() {
+	-webkit-justify-content: space-between;
+	   -moz-justify-content: space-between;
+		-ms-justify-content: space-between;
+			justify-content: space-between;
 }
 
 // ======================================================================================================= FONT
@@ -119,6 +160,13 @@
 		  transform: skew($degx, $degy);
 }
 
+@mixin rotate( $deg ){
+  -webkit-transform: rotate( $deg );
+	 -moz-transform: rotate( $deg );
+	  -ms-transform: rotate( $deg );
+		  transform: rotate( $deg );
+}
+
 // ======================================================================================================= TRANSITION
 
 @mixin transition($transition...) {
@@ -156,6 +204,22 @@
 		  transition-delay: $delay;
 }
 
+// ======================================================================================================= TEXT
+
+@mixin writing-mode( $value ) {
+	-webkit-writing-mode: $value;
+	   -moz-writing-mode: $value;
+		-ms-writing-mode: $value;
+			writing-mode: $value;
+}
+
+@mixin text-orientation( $value ) {
+	-webkit-text-orientation: $value;
+	   -moz-text-orientation: $value;
+		-ms-text-orientation: $value;
+			text-orientation: $value;
+}
+
 // ======================================================================================================= ANIMATION
 
 @mixin animation-fill-mode($mode...) {
@@ -190,4 +254,8 @@
 		fill: 					$txt;
 		stroke: 				$txt;
 	}
+
+	.-label, &.-label { color: inherit; }
+
+	input { background-color: $bg; }
 }

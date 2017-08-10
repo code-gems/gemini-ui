@@ -5,13 +5,32 @@ $hero-badge-border-size:	4px;
 
 // ======================================================================================================= TEMPLATES & MIXINS
 
+@mixin add-gradient( $color ) {
+	background: -webkit-linear-gradient(bottom, rgba( $color, 0.6 ) 0%, rgba( $color, 0.2 ) 30%, rgba( $color, 0) 100%);
+	background: 	 -o-linear-gradient(bottom, rgba( $color, 0.6 ) 0%, rgba( $color, 0.2 ) 30%, rgba( $color, 0) 100%);
+	background:   		linear-gradient(to top, rgba( $color, 0.6 ) 0%, rgba( $color, 0.2 ) 30%, rgba( $color, 0) 100%);
+}
+
 %hero {
 	position:				relative;
-	display:				block;
-	padding: 				$base-padding;
+	@include 				display-flex();
+	@include 				flex-flow( column wrap );
+	width: 					100%;
+	padding: 				0;
 
-	@extend 				%clearfix;
-	@include 				draw( $base-color-bg, $base-color-txt, $base-color-bg );
+	@include 				draw( lighten( $base-color-bg, 10%), $base-color-txt, $base-color-bg );
+	@include 				transition( min-height 2s ease-in-out );
+
+	text-align: 			center;
+
+	background-image: 		url('../img/fallback/hero-thumb.png');
+	background-size: 		cover;
+	background-position: 	center center;
+
+	p {
+		margin: 				0;
+		color: 					inherit;
+	}
 
 	.hero-badge {
 		position: 				absolute;
@@ -25,17 +44,47 @@ $hero-badge-border-size:	4px;
 		left: 					50%;
 
 		color: 					inherit;
-		line-height:			$hero-badge-size;
+		line-height:			$hero-badge-size - ($hero-badge-border-size * 2);
 		text-align: 			center;
-		font-size: 				2em;
+		font-size: 				24px;
 
 		@include 				round( $hero-badge-size / 2 );
-		border: 				$hero-badge-border-size solid;
+		@include 				shadow( 0 2px 5px rgba(0, 0, 0, .1) );
 
+		border: 				$hero-badge-border-size solid;
 		background-color: 		inherit;
 
-		@include 				shadow( 0 2px 5px rgba(0, 0, 0, .1) );
+		.hero-icon {
+			display: 				block;
+			width: 					$hero-badge-size - ($hero-badge-border-size * 2);
+			height: 				$hero-badge-size - ($hero-badge-border-size * 2);
+			line-height: 			$hero-badge-size - ($hero-badge-border-size * 2);
+			font-size: 				1.5em;
+		}
 	}
+
+	.hero-slogan {
+		width: 					100%;
+		padding: 				$base-padding;
+		margin: 				0;
+
+		color: 					inherit;
+		text-shadow: 			0 5px 15px rgba(0, 0, 0, .6);
+		z-index: 				1;
+	}
+
+	.hero-param {
+		padding: 				$base-padding;
+
+		color: 					inherit;
+		z-index: 				1;
+
+		&.-shadow { text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
+	}
+
+	&.-top 		{ @include justify-content( top ); }
+	&.-center 	{ @include justify-content( center ); }
+	&.-bottom 	{ @include justify-content( flex-end ); }
 
 	&.-badge {
 		padding-bottom: 		$base-padding + ($base-padding / 2);
@@ -43,17 +92,51 @@ $hero-badge-border-size:	4px;
 		border-bottom: 			$hero-badge-border-size solid;
 
 		@include 				shadow( 0 2px 5px rgba(0, 0, 0, .1) );
+
+		.hero-slogan, .hero-param {	padding-bottom: 5px; }
 	}
 
-	&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-txt ) }
-	&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-txt ) }
-	&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-txt ) }
-	&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-txt ) }
+	&.-text-protection {
+		&:before {
+			position: 				absolute;
+			display: 				block;
+			width: 					100%;
+			content: 				" ";
+			top: 					30%;
+			left: 					0;
+			bottom: 				0;
 
-	&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg, $action-success-txt ) }
-	&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg, 	$action-info-txt ) }
-	&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg, $action-warning-txt ) }
-	&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg, 	$action-danger-txt ) }
+			@include 				add-gradient( $base-color-txt );
+			z-index: 				0;
+		}
+
+		&.-primary:before		{ @include add-gradient( $brand-primary-bg ); }
+		&.-secondary:before		{ @include add-gradient( $brand-secondary-bg ); }
+		&.-tertiary:before		{ @include add-gradient( $brand-tertiary-bg ); }
+		&.-quaternary:before	{ @include add-gradient( $brand-quaternary-bg ); }
+
+		&.-success:before	{ @include add-gradient( $action-success-bg ); }
+		&.-info:before		{ @include add-gradient( $action-info-bg ); }
+		&.-warning:before	{ @include add-gradient( $action-warning-bg ); }
+		&.-danger:before	{ @include add-gradient( $action-danger-bg ); }
+	}
+
+	&.-banner { min-height: 35vh; }
+	&.-banner-small { min-height: 15vh; }
+
+	&.-no-img { background-image: none; }
+	&.-shadowed { @include shadow( 0 0 $base-padding rgba(0,0,0,.2) inset ); }
+
+	&.-primary 		{ @include draw( $brand-primary-txt, 	$brand-primary-bg, 		$brand-primary-txt ); }
+	&.-secondary 	{ @include draw( $brand-secondary-txt, 	$brand-secondary-bg, 	$brand-secondary-txt ); }
+	&.-tertiary 	{ @include draw( $brand-tertiary-txt, 	$brand-tertiary-bg, 	$brand-tertiary-txt ); }
+	&.-quaternary 	{ @include draw( $brand-quaternary-txt, $brand-quaternary-bg, 	$brand-quaternary-txt ); }
+
+	&.-success 	{ @include draw( $action-success-txt, 	$action-success-bg, $action-success-txt ); }
+	&.-info 	{ @include draw( $action-info-txt, 		$action-info-bg, 	$action-info-txt ); }
+	&.-warning 	{ @include draw( $action-warning-txt, 	$action-warning-bg, $action-warning-txt ); }
+	&.-danger 	{ @include draw( $action-danger-txt, 	$action-danger-bg, 	$action-danger-txt ); }
+	&.-glass	{ @include draw( $base-color-txt, transparent, $base-color-txt ); }
 
 } //-- end of %hero
 
@@ -62,3 +145,23 @@ $hero-badge-border-size:	4px;
 .hero { @extend %hero; }
 
 //================================================================================ RESPONSIVE
+
+// ...
+
+//================================================================================ ANDROID FIX
+
+.dev-android {
+	&.dev-android-4,
+	&.dev-android-5-0 {
+
+		.hero-badge {
+			-webkit-font-smoothing: antialiased;
+			-webkit-text-stroke: 	0.2px;
+
+			.hero-icon {
+				font-size: 				$mobile-font-size * 1.11112 !important;
+				line-height: 			($hero-badge-size - ($hero-badge-border-size * 2)) * 1.3 !important;
+			}
+		}
+	}
+}

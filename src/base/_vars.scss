@@ -5,12 +5,12 @@ $desktop-line-hight:			150%;																	// desktop - base line height
 $desktop-font-family:			"Brown Regular";														// desktop - base font family
 
 $mobile-font-size:				18px;																	// mobile - base font size
-$mobile-line-hight:				150%;																	// mobile - base line height
+$mobile-line-hight:				1.8em;																	// mobile - base line height
 $mobile-font-family:			"Brown Regular";														// mobile - base font family
 
 // ======================================================================================================= DEFAULTS
 
-$default-height: 				48px;																	// default component hight e.g. button
+$default-height: 				52px;																	// default component hight e.g. button
 
 // ======================================================================================================= BASE PADDING & MARGIN
 
@@ -24,3 +24,8 @@ $screen-size-l:					1440px;
 $screen-size-m:					1024px;
 $screen-size-s:					768px;
 $screen-size-xs:				480px;
+
+$screen-ios-l:					1024px;
+$screen-ios-m:					768px;
+$screen-ios-s:					375px;
+$screen-ios-xs:					320px;
